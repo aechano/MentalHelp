@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dashboard"
+        android:title="dashboard"
+        android:icon="@drawable/icon_dashboard"/>
+    <item
+        android:id="@+id/calendar"
+        android:title="calendar"
+        android:icon="@drawable/icon_calendar"/>
+    <item
+        android:id="@+id/add"
+        android:title="add"
+        android:icon="@drawable/icon_add"/>
+    <item
+        android:id="@+id/settings"
+        android:title="settings"
+        android:icon="@drawable/icon_settings"/>
+
+</menu>
