@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the status bar color to #2a07df
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        getWindow().setStatusBarColor(getResources().getColor(R.color.deluge)); // Create a color resource
+        getWindow().setStatusBarColor(getResources().getColor(R.color.melrose)); // Create a color resource
 
         handler = new Handler();
         handler.postDelayed(new Runnable() {
