@@ -12,8 +12,12 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 
+import com.example.mentalhelp.List.GuideList;
+import com.example.mentalhelp.List.JournalList;
+import com.example.mentalhelp.List.MusicList;
 import com.example.mentalhelp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -45,7 +49,27 @@ public class DashBoard extends AppCompatActivity {
         // Set the toolbar title text
         getSupportActionBar().setTitle(spannableString);
 
+        // Set OnClickListener for Hidden Blues card
+        findViewById(R.id.hiddenBlues).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashBoard.this, JournalList.class));
+            }
+        });
 
+        findViewById(R.id.music).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashBoard.this, MusicList.class));
+            }
+        });
+
+        findViewById(R.id.guides).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashBoard.this, GuideList.class));
+            }
+        });
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
             @Override

@@ -1,6 +1,5 @@
 package com.example.mentalhelp.List;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,23 +15,25 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-import com.example.mentalhelp.Adapter.JournalListAdapter;
-import com.example.mentalhelp.Model.JournalListModel;
+import com.example.mentalhelp.Adapter.GuideListAdapter;
+import com.example.mentalhelp.Adapter.MusicListAdapter;
+import com.example.mentalhelp.Model.GuideListModel;
+import com.example.mentalhelp.Model.MusicListModel;
 import com.example.mentalhelp.R;
 
 import java.util.ArrayList;
 
-public class JournalList extends AppCompatActivity {
+public class GuideList extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    JournalListAdapter journalListAdapter;
-    ArrayList<JournalListModel> journalListModelArrayList;
+    GuideListAdapter guideListAdapter;
+    ArrayList<GuideListModel> guideListModelArrayList;
     private FrameLayout progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_journal_list);
+        setContentView(R.layout.activity_guide_list);
 
         // Initialize your views
         recyclerView = findViewById(R.id.recyclerView);
@@ -47,23 +48,18 @@ public class JournalList extends AppCompatActivity {
         getWindow().setStatusBarColor(getResources().getColor(R.color.melrose));
 
         // Create a SpannableString for the title
-        SpannableString spannableString = new SpannableString("Hidden Blues");
+        SpannableString spannableString = new SpannableString("Guides");
         spannableString.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deluge)), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(spannableString);
 
-        // Initialize your list of journal entries
-        journalListModelArrayList = new ArrayList<>();
+        guideListModelArrayList = new ArrayList<>();
 
-        // Sample data for demonstration
-        journalListModelArrayList.add(new JournalListModel("This is a long Title that I created which can go beyond the card view", "10-20-24", "I am not Happy because there is a lot of gawain and I'm tired, want to go to sleep. Please let me finish this ngayong week na huhu kasi a lot of gawain is waiting pa"));
-        journalListModelArrayList.add(new JournalListModel("Their Title", "10-20-24", "I am Happy"));
-        journalListModelArrayList.add(new JournalListModel("Me Title", "10-20-24", "I am good"));
-        journalListModelArrayList.add(new JournalListModel("She Title", "10-20-24", "I am fabulous"));
-        journalListModelArrayList.add(new JournalListModel("He Title", "10-20-24", "I can do it"));
+        guideListModelArrayList.add(new GuideListModel("My title is too long as it can go to another universe because it is very very long."));
+        guideListModelArrayList.add(new GuideListModel("How to fight anxiety"));
 
         // Check if there is data
-        if (journalListModelArrayList.isEmpty()) {
+        if (guideListModelArrayList.isEmpty()) {
             // If there is no data, show the progress bar and hide the RecyclerView
             progressBar.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
@@ -74,8 +70,8 @@ public class JournalList extends AppCompatActivity {
 
             // Populate your RecyclerView with data
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            journalListAdapter = new JournalListAdapter(journalListModelArrayList, this);
-            recyclerView.setAdapter(journalListAdapter);
+            guideListAdapter = new GuideListAdapter(guideListModelArrayList, this);
+            recyclerView.setAdapter(guideListAdapter);
         }
     }
 
@@ -93,5 +89,4 @@ public class JournalList extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }
