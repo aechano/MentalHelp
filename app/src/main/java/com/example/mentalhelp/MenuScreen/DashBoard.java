@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -17,7 +16,7 @@ import android.view.WindowManager;
 
 import com.example.mentalhelp.List.GuideList;
 import com.example.mentalhelp.List.JournalList;
-import com.example.mentalhelp.List.MusicList;
+import com.example.mentalhelp.MenuScreen.Solitunes.MusicList;
 import com.example.mentalhelp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
