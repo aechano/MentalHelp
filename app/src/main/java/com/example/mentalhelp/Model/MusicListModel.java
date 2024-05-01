@@ -3,9 +3,9 @@ package com.example.mentalhelp.Model;
 public class MusicListModel {
 
     String title;
-    String path;
+    int path;
 
-    public MusicListModel(String title, String path) {
+    public MusicListModel(String title, int path) {
         this.title = title;
         this.path = path;
     }
@@ -17,11 +17,11 @@ public class MusicListModel {
         this.title = title;
     }
 
-    public String getPath() {
+    public int getPath() {
         return path;
     }
 
-    public void setPath(String path) {
+    public void setPath(int path) {
         this.path = path;
     }
 }

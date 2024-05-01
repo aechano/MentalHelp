@@ -2,16 +2,13 @@ package com.example.mentalhelp.Database.Objects;
 
 public class Music {
     private Integer id;
-    private String music;
+    private int music;
     private String title;
 
-    public Music(Integer id, String music, String title) {
+    public Music(Integer id, int music, String title) {
         this.id = id;
         this.music = music;
         this.title = title;
-    }
-
-    public Music() {
     }
 
     public Integer getId() {
@@ -22,11 +19,11 @@ public class Music {
         this.id = id;
     }
 
-    public String getMusic() {
+    public int getMusic() {
         return music;
     }
 
-    public void setMusic(String music) {
+    public void setMusic(int music) {
         this.music = music;
     }
 

@@ -57,7 +57,7 @@ public interface Database {
 
     String query2 = "CREATE TABLE " + TABLE_MUSIC + "("
             + M_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + M_MUSIC + " TEXT, "
+            + M_MUSIC + " INTEGER, "
             + M_TITLE + " TEXT);";
 
     String query3 = "CREATE TABLE " + TABLE_GUIDES + "("

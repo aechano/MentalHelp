@@ -1,5 +1,6 @@
 package com.example.mentalhelp.MenuScreen.Solitunes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mentalhelp.Adapter.MusicListAdapter;
+import com.example.mentalhelp.Application.MentalHelp;
 import com.example.mentalhelp.Database.DB;
 import com.example.mentalhelp.Database.Objects.Music;
 import com.example.mentalhelp.Model.MusicListModel;
@@ -72,8 +74,16 @@ public class MusicList extends AppCompatActivity {
 
             // Populate your RecyclerView with data
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            musicListAdapter = new MusicListAdapter(musicListModelArrayList, this);
+            musicListAdapter = new MusicListAdapter(musicListModelArrayList);
             recyclerView.setAdapter(musicListAdapter);
+            musicListAdapter.setOnSongClickListener(new MusicListAdapter.OnSongClick() {
+                @Override
+                public void songClick(MusicListModel musicListModel) {
+                    MentalHelp.getInstance().setMusicListModel(musicListModel);
+                    Intent intent = new Intent(getApplicationContext(), Solitunes.class);
+                    startActivity(intent);
+                }
+            });
         }
 
     }

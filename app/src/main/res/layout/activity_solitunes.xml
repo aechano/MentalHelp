@@ -6,19 +6,22 @@
     android:layout_height="match_parent"
     android:background="@color/melrose"
     tools:context=".MenuScreen.Solitunes.Solitunes">
-    
+
     <TextView
+        android:id="@+id/mp3_player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/mp3_player"
-        android:text="Title of the Song"
-        android:fontFamily="@font/nunito_sans"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:singleLine="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:ellipsize="marquee"
-        android:layout_margin="20dp"
-        android:padding="20dp"/>
+        android:fontFamily="@font/nunito_sans"
+        android:padding="20dp"
+        android:singleLine="true"
+        android:text="Title of the Song"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/musicIcon"
@@ -53,13 +56,16 @@
             android:layout_margin="20dp"/>
 
         <TextView
+            android:id="@+id/total_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/total_time"
-            android:text="0:00"
-            android:textColor="@color/white"
             android:layout_alignParentEnd="true"
-            android:layout_margin="20dp"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="0:00"
+            android:textColor="@color/white" />
 
         <RelativeLayout
             android:layout_width="match_parent"

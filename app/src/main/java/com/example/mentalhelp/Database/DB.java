@@ -88,7 +88,7 @@ public class DB extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 int ingredientID = cursor.getInt(cursor.getColumnIndex(M_ID));
-                String music = cursor.getString(cursor.getColumnIndex(M_MUSIC));
+                int music = cursor.getInt(cursor.getColumnIndex(M_MUSIC));
                 String musicTitle = cursor.getString(cursor.getColumnIndex(M_TITLE));
 
                 Music musicObject = new Music(ingredientID, music, musicTitle);

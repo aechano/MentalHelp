@@ -17,11 +17,10 @@ import java.util.ArrayList;
 public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.ViewHolder> {
 
     private ArrayList<MusicListModel> musicListModels;
-    private Context context;
+    private OnSongClick onSongClick;
 
-    public MusicListAdapter(ArrayList<MusicListModel> musicListModels, Context context) {
+    public MusicListAdapter(ArrayList<MusicListModel> musicListModels) {
         this.musicListModels = musicListModels;
-        this.context = context;
     }
 
     @NonNull
@@ -35,6 +34,7 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final MusicListModel musicListModel =musicListModels.get(position);
         holder.mtitle.setText(musicListModel.getTitle());
+        holder.itemView.setOnClickListener(v -> onSongClick.songClick(musicListModel));
     }
 
     @Override
@@ -46,8 +46,15 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
         TextView mtitle;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             mtitle = itemView.findViewById(R.id.title);
         }
+    }
+
+    public interface OnSongClick {
+        void songClick(MusicListModel musicListModel);
+    }
+
+    public void setOnSongClickListener(OnSongClick onSongClick) {
+        this.onSongClick = onSongClick;
     }
 }
