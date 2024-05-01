@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mentalhelp.Adapter.MusicListAdapter;
+import com.example.mentalhelp.Database.DB;
+import com.example.mentalhelp.Database.Objects.Music;
 import com.example.mentalhelp.Model.MusicListModel;
 import com.example.mentalhelp.R;
 
@@ -51,11 +53,12 @@ public class MusicList extends AppCompatActivity {
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deluge)), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(spannableString);
 
-
+        DB db = new DB(getApplicationContext());
         musicListModelArrayList = new ArrayList<>();
 
-        musicListModelArrayList.add(new MusicListModel("My title is too long as it can go to another universe because it is very very long."));
-        musicListModelArrayList.add(new MusicListModel("Trouble is a friend - lenka"));
+        for (Music music : db.getAllMusic()){
+            musicListModelArrayList.add(new MusicListModel(music.getTitle(), music.getMusic()));
+        }
 
         // Check if there is data
         if (musicListModelArrayList.isEmpty()) {
