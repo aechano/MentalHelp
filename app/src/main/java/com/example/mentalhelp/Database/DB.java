@@ -1,7 +1,5 @@
 package com.example.mentalhelp.Database;
 
-import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
-
 import static com.example.mentalhelp.Database.Database.DB_NAME;
 import static com.example.mentalhelp.Database.Database.DB_VERSION;
 import static com.example.mentalhelp.Database.Database.M_ID;
@@ -11,25 +9,15 @@ import static com.example.mentalhelp.Database.Database.TABLE_MUSIC;
 import static com.example.mentalhelp.Database.Database.query2;
 
 import android.annotation.SuppressLint;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-
-import androidx.annotation.NonNull;
 
 import com.example.mentalhelp.Database.Objects.Music;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
 
 @SuppressLint("Range")
 public class DB extends SQLiteOpenHelper {

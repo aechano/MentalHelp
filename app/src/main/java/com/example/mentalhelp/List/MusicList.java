@@ -1,12 +1,5 @@
 package com.example.mentalhelp.List;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -17,10 +10,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-import com.example.mentalhelp.Adapter.JournalListAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.mentalhelp.Adapter.MusicListAdapter;
-import com.example.mentalhelp.Manifest;
-import com.example.mentalhelp.Model.JournalListModel;
 import com.example.mentalhelp.Model.MusicListModel;
 import com.example.mentalhelp.R;
 
