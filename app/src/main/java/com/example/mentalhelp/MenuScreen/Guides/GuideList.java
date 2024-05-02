@@ -17,8 +17,11 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.example.mentalhelp.Adapter.GuideListAdapter;
+import com.example.mentalhelp.Database.DB;
+import com.example.mentalhelp.Database.Objects.Music;
 import com.example.mentalhelp.MenuScreen.Guides.Guides;
 import com.example.mentalhelp.Model.GuideListModel;
+import com.example.mentalhelp.Model.MusicListModel;
 import com.example.mentalhelp.R;
 
 import java.util.ArrayList;
@@ -53,10 +56,11 @@ public class GuideList extends AppCompatActivity implements GuideListAdapter.OnI
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deluge)), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(spannableString);
 
+        DB db = new DB(getApplicationContext());
+
         guideListModelArrayList = new ArrayList<>();
 
-        guideListModelArrayList.add(new GuideListModel("My title is too long as it can go to another universe because it is very very long.", "anxiety.pdf"));
-        guideListModelArrayList.add(new GuideListModel("How to fight anxiety", "anxiety.pdf"));
+        guideListModelArrayList.addAll(db.getAllGuides());
 
         // Check if there is data
         if (guideListModelArrayList.isEmpty()) {
@@ -93,7 +97,8 @@ public class GuideList extends AppCompatActivity implements GuideListAdapter.OnI
     @Override
     public void onItemClick(GuideListModel guideListModel) {
         if (guideListModel == null) return; // Bad Gateway: No guide chosen.
-        if (guideListModel.getPath() == null) return; // Bad Request: No path indicated in the chosen model.
+        if (guideListModel.getPath() == null)
+            return; // Bad Request: No path indicated in the chosen model.
         Intent intent = new Intent(this, Guides.class);
         intent.putExtra("PATH", guideListModel.getPath());
         intent.putExtra("TITLE", guideListModel.getTitle());
