@@ -6,10 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".MenuScreen.AddJournal">
 
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:background="@color/melrose"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="?attr/homeAsUpIndicator"/>
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_background"
+        android:layout_below="@id/toolbar"
+        android:padding="10dp"
+        android:inputType="text"
+        android:maxLines="1"
+        android:hint="This is the Title"
+        android:textColor="#333333"
+        android:textSize="24sp"
+        android:fontFamily="@font/nunito_sans" />
+    
+    <TextView
+        android:id="@+id/datetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText"
+        android:textColor="#333333"
+        android:fontFamily="@font/nunito_sans"
+        android:textSize="16sp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:text="Select Date"
+        />
+
     <com.example.mentalhelp.LinedEditText
         android:id="@+id/note_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/datetext"
         android:padding="16dp"
         android:gravity="top"
         android:textSize="16sp"
