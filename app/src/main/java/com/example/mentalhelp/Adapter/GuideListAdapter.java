@@ -42,7 +42,7 @@ public class GuideListAdapter extends RecyclerView.Adapter<GuideListAdapter.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick(position);
+                listener.onItemClick(guideListModel);
             }
         });
     }
@@ -65,6 +65,6 @@ public class GuideListAdapter extends RecyclerView.Adapter<GuideListAdapter.View
 
     // Interface for item click listener
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(GuideListModel guideListModel);
     }
 }

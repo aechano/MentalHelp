@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.example.mentalhelp.List.GuideList;
+import com.example.mentalhelp.MenuScreen.Guides.GuideList;
 import com.example.mentalhelp.List.JournalList;
 import com.example.mentalhelp.MenuScreen.Solitunes.MusicList;
 import com.example.mentalhelp.R;
