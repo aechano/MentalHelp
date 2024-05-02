@@ -25,6 +25,23 @@ public class MentalHelp extends Application {
         this.mediaPlayer = MediaPlayer.create(this, musicListModel.getPath());
     }
 
+    public int getSongDuration(){
+        if (this.mediaPlayer == null) return -1;
+        if (this.mediaPlayer.getDuration() == -1) return -1;
+        return this.mediaPlayer.getDuration();
+    }
+
+    public int getSongCurrentPosition(){
+        if (this.mediaPlayer == null) return -1;
+        if (this.mediaPlayer.getCurrentPosition() == -1) return -1;
+        return this.mediaPlayer.getCurrentPosition();
+    }
+
+    public void setSongToPosition(int position){
+        if (this.mediaPlayer == null) return;
+        this.mediaPlayer.seekTo(position);
+    }
+
     public MusicListModel getMusicListModel() {
         return musicListModel;
     }
