@@ -40,9 +40,12 @@ public class DB extends SQLiteOpenHelper {
 
     public void populateMusicTable() {
         List<Music> musicList = this.getAllMusic();
-        if (musicList.size() > 0) return; // if music table is populated, stop the function.
+        int currentEntries = 5; //update this every time you insert new preset music.
+        if (musicList.size() >= currentEntries) return; // if music table has more than or equal to the current entries, stop the function.
 
         SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_MUSIC, null, null);
 
         ContentValues values = new ContentValues();
 
