@@ -46,5 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private void initializeDatabase() {
         db = new DB(getApplicationContext());
         db.populateMusicTable();
+        db.populateGuidesTable();
     }
 }

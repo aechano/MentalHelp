@@ -2,7 +2,7 @@ package com.example.mentalhelp.Database;
 
 public interface Database {
     String DB_NAME = "mental_help.db";
-    Integer DB_VERSION = 1;
+    Integer DB_VERSION = 4;
 
     //TABLE 1 - Journal: journal_id, title, contents, date_created, date_modified
     String TABLE_JOURNEY = "journey";

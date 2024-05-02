@@ -3,9 +3,19 @@ package com.example.mentalhelp.Model;
 public class GuideListModel {
 
     String title;
+    String path;
 
-    public GuideListModel(String title) {
+    public GuideListModel(String title, String path) {
         this.title = title;
+        this.path = path;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public String getTitle() {
