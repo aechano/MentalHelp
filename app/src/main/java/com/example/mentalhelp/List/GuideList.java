@@ -1,10 +1,12 @@
 package com.example.mentalhelp.List;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -16,14 +18,13 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.example.mentalhelp.Adapter.GuideListAdapter;
-import com.example.mentalhelp.Adapter.MusicListAdapter;
+import com.example.mentalhelp.MenuScreen.Guides;
 import com.example.mentalhelp.Model.GuideListModel;
-import com.example.mentalhelp.Model.MusicListModel;
 import com.example.mentalhelp.R;
 
 import java.util.ArrayList;
 
-public class GuideList extends AppCompatActivity {
+public class GuideList extends AppCompatActivity implements GuideListAdapter.OnItemClickListener {
 
     RecyclerView recyclerView;
     GuideListAdapter guideListAdapter;
@@ -70,7 +71,7 @@ public class GuideList extends AppCompatActivity {
 
             // Populate your RecyclerView with data
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            guideListAdapter = new GuideListAdapter(guideListModelArrayList, this);
+            guideListAdapter = new GuideListAdapter(guideListModelArrayList, this, this);
             recyclerView.setAdapter(guideListAdapter);
         }
     }
@@ -88,5 +89,13 @@ public class GuideList extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        // Handle item click here
+        // For example, start the Guides activity with intent
+        Intent intent = new Intent(this, Guides.class);
+        startActivity(intent);
     }
 }

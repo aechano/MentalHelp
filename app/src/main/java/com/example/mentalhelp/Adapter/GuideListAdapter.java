@@ -1,5 +1,6 @@
 package com.example.mentalhelp.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,35 +11,42 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mentalhelp.Model.GuideListModel;
-import com.example.mentalhelp.Model.JournalListModel;
-import com.example.mentalhelp.Model.MusicListModel;
 import com.example.mentalhelp.R;
 
 import java.util.ArrayList;
 
-public class GuideListAdapter extends RecyclerView.Adapter <GuideListAdapter.ViewHolder>{
+public class GuideListAdapter extends RecyclerView.Adapter<GuideListAdapter.ViewHolder> {
 
     private ArrayList<GuideListModel> guideListModels;
     private Context context;
+    private OnItemClickListener listener;
 
-    public GuideListAdapter(ArrayList<GuideListModel> guideListModels, Context context) {
+    public GuideListAdapter(ArrayList<GuideListModel> guideListModels, Context context, OnItemClickListener listener) {
         this.guideListModels = guideListModels;
         this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
-    public GuideListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.general_view, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GuideListAdapter.ViewHolder holder, int position) {
-        final GuideListModel guideListModel =guideListModels.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        final GuideListModel guideListModel = guideListModels.get(position);
         holder.gtitle.setText(guideListModel.getTitle());
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(position);
+            }
+        });
     }
+
     @Override
     public int getItemCount() {
         return guideListModels.size();
@@ -53,5 +61,10 @@ public class GuideListAdapter extends RecyclerView.Adapter <GuideListAdapter.Vie
 
             gtitle = itemView.findViewById(R.id.title);
         }
+    }
+
+    // Interface for item click listener
+    public interface OnItemClickListener {
+        void onItemClick(int position);
     }
 }
