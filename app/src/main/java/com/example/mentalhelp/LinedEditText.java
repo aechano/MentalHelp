@@ -22,7 +22,7 @@ public class LinedEditText extends androidx.appcompat.widget.AppCompatEditText {
         mPaint.setColor(0x800000FF);
 
         // Set the spacing between lines
-        mLineSpacing = (int) getTextSize() + 10; // Adjust as needed
+        mLineSpacing = (int) getTextSize() + 5; // Adjust as needed
     }
 
     @Override
