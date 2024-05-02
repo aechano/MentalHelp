@@ -10,7 +10,9 @@ public class LinedEditText extends androidx.appcompat.widget.AppCompatEditText {
     private Rect mRect;
     private Paint mPaint;
 
-    // we need this constructor for LayoutInflater
+    // Spacing between lines in pixels
+    private int mLineSpacing;
+
     public LinedEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -18,21 +20,24 @@ public class LinedEditText extends androidx.appcompat.widget.AppCompatEditText {
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setColor(0x800000FF);
+
+        // Set the spacing between lines
+        mLineSpacing = (int) getTextSize() + 10; // Adjust as needed
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        int count = getLineCount();
+        int count = (int) Math.ceil((float) (getBottom() - getTop()) / mLineSpacing);
         Rect r = mRect;
         Paint paint = mPaint;
 
-        for (int i = 0; i < count; i++) {
-            int baseline = getLineBounds(i, r);
+        // Adjust the position to start from the baseline of the first line
+        int baseline = getLineBounds(0, r);
 
-            canvas.drawLine(r.left, baseline + 1, r.right, baseline + 1, paint);
+        for (int i = 0; i < count; i++) {
+            canvas.drawLine(r.left, baseline + i * mLineSpacing + 1, r.right, baseline + i * mLineSpacing + 1, paint);
         }
 
         super.onDraw(canvas);
     }
 }
-
