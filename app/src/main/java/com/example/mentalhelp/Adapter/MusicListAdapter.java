@@ -34,7 +34,7 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final MusicListModel musicListModel =musicListModels.get(position);
         holder.mtitle.setText(musicListModel.getTitle());
-        holder.itemView.setOnClickListener(v -> onSongClick.songClick(musicListModel));
+        holder.itemView.setOnClickListener(v -> onSongClick.songClick(musicListModel, position));
     }
 
     @Override
@@ -51,7 +51,7 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
     }
 
     public interface OnSongClick {
-        void songClick(MusicListModel musicListModel);
+        void songClick(MusicListModel musicListModel, int position);
     }
 
     public void setOnSongClickListener(OnSongClick onSongClick) {

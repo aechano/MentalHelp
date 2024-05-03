@@ -62,6 +62,8 @@ public class MusicList extends AppCompatActivity {
             musicListModelArrayList.add(new MusicListModel(music.getTitle(), music.getMusic()));
         }
 
+        MentalHelp.getInstance().setMusicListModelList(musicListModelArrayList);
+
         // Check if there is data
         if (musicListModelArrayList.isEmpty()) {
             // If there is no data, show the progress bar and hide the RecyclerView
@@ -78,8 +80,8 @@ public class MusicList extends AppCompatActivity {
             recyclerView.setAdapter(musicListAdapter);
             musicListAdapter.setOnSongClickListener(new MusicListAdapter.OnSongClick() {
                 @Override
-                public void songClick(MusicListModel musicListModel) {
-                    MentalHelp.getInstance().setMusicListModel(musicListModel);
+                public void songClick(MusicListModel musicListModel, int position) {
+                    MentalHelp.getInstance().setMusicListModel(musicListModel, position);
                     Intent intent = new Intent(getApplicationContext(), Solitunes.class);
                     startActivity(intent);
                 }
@@ -96,7 +98,7 @@ public class MusicList extends AppCompatActivity {
         // Handle the back arrow click
         if (id == android.R.id.home) {
             // Navigate back to previous activity or finish the current activity
-            onBackPressed();
+            getOnBackPressedDispatcher().onBackPressed();
             return true;
         }
 
