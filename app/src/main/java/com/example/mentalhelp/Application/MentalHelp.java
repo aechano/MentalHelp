@@ -18,6 +18,7 @@ public class MentalHelp extends Application {
     OnSongCompletion onSongCompletion;
     List<MusicListModel> musicListModelList;
     static MentalHelp instance;
+    Boolean havePlayed = false;
 
     @Override
     public void onCreate() {
@@ -28,9 +29,10 @@ public class MentalHelp extends Application {
     }
 
     public void setMusicListModel(MusicListModel musicListModel, int position) {
+        musicStop();
+        this.havePlayed = false;
         this.musicPosition = position;
         this.musicListModel = musicListModel;
-        musicStop();
         this.mediaPlayer = MediaPlayer.create(this, musicListModel.getPath());
         this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -41,19 +43,17 @@ public class MentalHelp extends Application {
         });
     }
 
-    public void setOnSongCompletionListener(OnSongCompletion onSongCompletion){
+    public void setOnSongCompletionListener(OnSongCompletion onSongCompletion) {
         this.onSongCompletion = onSongCompletion;
     }
 
     public boolean nextMusic() {
         if (this.mediaPlayer == null) return false;
         musicPosition++;
-        if (musicPosition == musicListModelList.size()){
+        if (musicPosition == musicListModelList.size()) {
             // this will become out of bounds
             Toast.makeText(getApplicationContext(), "This is the end of Solitunes Playlist! Thank you for listening!", Toast.LENGTH_SHORT).show();
-            musicPosition = -1; // no position
             musicStop(); // stopped music
-            this.musicListModel = null; // no chosen song
             return false;
         }
         this.musicListModel = musicListModelList.get(musicPosition);
@@ -90,6 +90,10 @@ public class MentalHelp extends Application {
         return musicListModel;
     }
 
+    public Boolean getHavePlayed() {
+        return havePlayed;
+    }
+
     public List<MusicListModel> getMusicListModelList() {
         return musicListModelList;
     }
@@ -106,6 +110,7 @@ public class MentalHelp extends Application {
     public void musicPlay() {
         if (mediaPlayer != null) {
             mediaPlayer.start();
+            havePlayed = true;
         }
     }
 
@@ -121,7 +126,15 @@ public class MentalHelp extends Application {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer = null;
+            this.musicListModel = null; // no chosen song
+            musicPosition = -1; // no position
         }
+    }
+
+    public int musicState() {
+        if (mediaPlayer == null) return -1; // no music in queue
+        if (mediaPlayer.isPlaying()) return 1; // music is playing
+        return 0; // music in queue, but paused.
     }
 
     @Override
@@ -132,4 +145,6 @@ public class MentalHelp extends Application {
     public interface OnSongCompletion {
         void onSongCompletion();
     }
+
+
 }

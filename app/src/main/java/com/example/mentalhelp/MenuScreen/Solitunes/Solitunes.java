@@ -32,8 +32,8 @@ public class Solitunes extends AppCompatActivity {
     TextView songTitle;
     TextView totalTime;
     SeekBar musicSeekbar;
+    ImageView pausePlay;
     Long lastClickedPrevious = 0L;
-    Boolean isPlaying = false;
     private Handler handler;
 
     @Override
@@ -59,7 +59,7 @@ public class Solitunes extends AppCompatActivity {
 
         songTitle = findViewById(R.id.mp3_player);
         totalTime = findViewById(R.id.total_time);
-        ImageView pausePlay = findViewById(R.id.play);
+        pausePlay = findViewById(R.id.play);
         ImageView previousSong = findViewById(R.id.previous);
         ImageView nextSong = findViewById(R.id.next);
         currentTime = findViewById(R.id.current_time);
@@ -86,14 +86,13 @@ public class Solitunes extends AppCompatActivity {
         });
 
         pausePlay.setOnClickListener(v -> {
-            if (isPlaying) {
+            if (mentalHelp.musicState() == 1) {
                 pausePlay.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), R.drawable.play_button, getTheme()));
                 mentalHelp.musicPause();
             } else {
                 pausePlay.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), R.drawable.play, getTheme()));
                 mentalHelp.musicPlay();
             }
-            isPlaying = !isPlaying;
         });
 
         previousSong.setOnClickListener(v -> {
@@ -171,13 +170,19 @@ public class Solitunes extends AppCompatActivity {
         musicSeekbar.setMax(Math.toIntExact(mils));
 
         // set current time to 0:00
-        currentTime.setText(millisToTimeString(0));
-        musicSeekbar.setProgress(0);
+        currentTime.setText(millisToTimeString(mentalHelp.getSongCurrentPosition()));
+        musicSeekbar.setProgress(mentalHelp.getSongCurrentPosition());
 
         songTitle.setText(musicListModel.getTitle());
-
-        mentalHelp.musicPlay();
-        isPlaying = true;
+        if (!mentalHelp.getHavePlayed()) {
+            // if not played previously, means that it came from a click from the list.
+            mentalHelp.musicPlay();
+        }
+        if (mentalHelp.musicState() == 0) {
+            pausePlay.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), R.drawable.play_button, getTheme()));
+        } else {
+            pausePlay.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), R.drawable.play, getTheme()));
+        }
     }
 
     private String millisToTimeString(long time) {
