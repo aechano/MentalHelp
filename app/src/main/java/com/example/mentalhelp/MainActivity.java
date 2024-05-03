@@ -8,8 +8,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.mentalhelp.Database.DB;
 import com.example.mentalhelp.Form.RegistrationForm;
 import com.example.mentalhelp.MenuScreen.DashBoard;
@@ -37,10 +40,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 3000);
+        }, 8000);
 
         // run loading processes
         initializeDatabase();
+
+        // Load GIF into the View
+        ImageView logoView = findViewById(R.id.logoView); // Change View to ImageView
+        Glide.with(this).load(R.drawable.knowledge_unscreen).into(logoView);
     }
 
     private void initializeDatabase() {

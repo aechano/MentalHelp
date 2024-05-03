@@ -116,4 +116,19 @@ public class AddJournal extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here
+        int id = item.getItemId();
+
+        // Handle the back arrow click
+        if (id == android.R.id.home) {
+            // Navigate back to previous activity or finish the current activity
+            getOnBackPressedDispatcher().onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

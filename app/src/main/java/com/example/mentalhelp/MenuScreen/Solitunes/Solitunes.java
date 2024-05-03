@@ -6,6 +6,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -141,5 +142,20 @@ public class Solitunes extends AppCompatActivity {
         long min = Math.toIntExact((time / 1000) / 60);
         long sec = Math.toIntExact((time / 1000) % 60);
         return String.format(Locale.getDefault(), "%d:%02d", min, sec);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here
+        int id = item.getItemId();
+
+        // Handle the back arrow click
+        if (id == android.R.id.home) {
+            // Navigate back to previous activity or finish the current activity
+            getOnBackPressedDispatcher().onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
