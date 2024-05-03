@@ -28,9 +28,13 @@ import java.util.concurrent.TimeUnit;
 public class Solitunes extends AppCompatActivity {
 
     MentalHelp mentalHelp;
+    MusicListModel musicListModel;
     TextView currentTime;
+    TextView songTitle;
+    TextView totalTime;
     SeekBar musicSeekbar;
-    Boolean isPlaying = false;
+    ImageView pausePlay;
+    Long lastClickedPrevious = 0L;
     private Handler handler;
 
     @Override
@@ -54,34 +58,15 @@ public class Solitunes extends AppCompatActivity {
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deluge)), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(spannableString);
 
-        MusicListModel musicListModel = mentalHelp.getMusicListModel();
-        if (musicListModel == null) {
-            // if musicListModel is null, then go back to MusicList as a song has not been selected.
-            finish();
-            Toast.makeText(getApplicationContext(), "Bad Gateway: A song has not been selected. Please select a song before proceeding here.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        TextView songTitle = findViewById(R.id.mp3_player);
-        TextView totalTime = findViewById(R.id.total_time);
-        ImageView pausePlay = findViewById(R.id.play);
+        songTitle = findViewById(R.id.mp3_player);
+        totalTime = findViewById(R.id.total_time);
+        pausePlay = findViewById(R.id.play);
+        ImageView previousSong = findViewById(R.id.previous);
+        ImageView nextSong = findViewById(R.id.next);
         currentTime = findViewById(R.id.current_time);
         musicSeekbar = findViewById(R.id.seekbar);
 
-        long mils = mentalHelp.getSongDuration();
-
-        // set maximum time
-        totalTime.setText(millisToTimeString(mils));
-        musicSeekbar.setMax(Math.toIntExact(mils));
-
-        // set current time to 0:00
-        currentTime.setText(millisToTimeString(0));
-        musicSeekbar.setProgress(0);
-
-        songTitle.setText(musicListModel.getTitle());
-
-        mentalHelp.musicPlay();
-        isPlaying = true;
+        initializeMusicInterface();
 
         musicSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -101,17 +86,42 @@ public class Solitunes extends AppCompatActivity {
             }
         });
 
-        pausePlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isPlaying) {
-                    pausePlay.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), R.drawable.play_button, getTheme()));
-                    mentalHelp.musicPause();
-                } else {
-                    pausePlay.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), R.drawable.play, getTheme()));
-                    mentalHelp.musicPlay();
-                }
-                isPlaying = !isPlaying;
+        pausePlay.setOnClickListener(v -> {
+            if (mentalHelp.musicState() == 1) {
+                pausePlay.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), R.drawable.play_button, getTheme()));
+                mentalHelp.musicPause();
+            } else {
+                pausePlay.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), R.drawable.play, getTheme()));
+                mentalHelp.musicPlay();
+            }
+        });
+
+        previousSong.setOnClickListener(v -> {
+            if (System.currentTimeMillis() - lastClickedPrevious < 2000) {
+                mentalHelp.previousMusic();
+                initializeMusicInterface();
+            } else {
+                // keep track of lastClickedPrevious
+                lastClickedPrevious = System.currentTimeMillis();
+
+                // reset song
+                mentalHelp.setSongToPosition(0);
+                currentTime.setText(millisToTimeString(0));
+                musicSeekbar.setProgress(0);
+            }
+        });
+
+        nextSong.setOnClickListener(v -> {
+            boolean successful = mentalHelp.nextMusic();
+            if (successful) initializeMusicInterface();
+            else {
+                Handler newHandler = new Handler();
+                newHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 500);
             }
         });
 
@@ -126,8 +136,8 @@ public class Solitunes extends AppCompatActivity {
                 currentTime.setText(millisToTimeString(currentTimeMillis));
                 musicSeekbar.setProgress(Math.toIntExact(currentTimeMillis));
 
-                if (currentTimeMillis >= mentalHelp.getSongDuration()) {
-                    return; // end
+                if (mentalHelp.getMusicListModel() == null) {
+                    return;
                 }
 
                 handler.postDelayed(this, 1000);
@@ -136,6 +146,44 @@ public class Solitunes extends AppCompatActivity {
 
         // Start updating the TextView every second
         handler.post(updateTime);
+
+        mentalHelp.setOnSongCompletionListener(new MentalHelp.OnSongCompletion() {
+            @Override
+            public void onSongCompletion() {
+                nextSong.performClick();
+            }
+        });
+    }
+
+    private void initializeMusicInterface(){
+        musicListModel = mentalHelp.getMusicListModel();
+        if (musicListModel == null) {
+            // if musicListModel is null, then go back to MusicList as a song has not been selected.
+            finish();
+            Toast.makeText(getApplicationContext(), "Bad Gateway: A song has not been selected. Please select a song before proceeding here.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        long mils = mentalHelp.getSongDuration();
+
+        // set maximum time
+        totalTime.setText(millisToTimeString(mils));
+        musicSeekbar.setMax(Math.toIntExact(mils));
+
+        // set current time to 0:00
+        currentTime.setText(millisToTimeString(mentalHelp.getSongCurrentPosition()));
+        musicSeekbar.setProgress(mentalHelp.getSongCurrentPosition());
+
+        songTitle.setText(musicListModel.getTitle());
+        if (!mentalHelp.getHavePlayed()) {
+            // if not played previously, means that it came from a click from the list.
+            mentalHelp.musicPlay();
+        }
+        if (mentalHelp.musicState() == 0) {
+            pausePlay.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), R.drawable.play_button, getTheme()));
+        } else {
+            pausePlay.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), R.drawable.play, getTheme()));
+        }
     }
 
     private String millisToTimeString(long time) {

@@ -2,6 +2,8 @@ package com.example.mentalhelp.MenuScreen.Solitunes;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.service.quickaccesswallet.GetWalletCardsCallback;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -10,9 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +36,13 @@ public class MusicList extends AppCompatActivity {
     RecyclerView recyclerView;
     MusicListAdapter musicListAdapter;
     ArrayList<MusicListModel> musicListModelArrayList;
+    ImageView pausePlay;
+    ImageView previousSong;
+    ImageView nextSong;
+    TextView musicTitle;
+    CardView playingControls;
+    Long lastClickedPrevious = 0L;
+    MentalHelp mentalHelp;
     private FrameLayout progressBar;
 
     @Override
@@ -40,6 +53,11 @@ public class MusicList extends AppCompatActivity {
         // Initialize your views
         recyclerView = findViewById(R.id.recyclerView);
         progressBar = findViewById(R.id.progressBar);
+        musicTitle = findViewById(R.id.music_title);
+        nextSong = findViewById(R.id.next_song);
+        previousSong = findViewById(R.id.previous_song);
+        pausePlay = findViewById(R.id.pause_play);
+        playingControls = findViewById(R.id.playing_controls);
 
         // Set up your toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -55,12 +73,22 @@ public class MusicList extends AppCompatActivity {
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deluge)), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(spannableString);
 
+        mentalHelp = MentalHelp.getInstance();
+
+        if (mentalHelp.musicState() == -1) {
+            playingControls.setVisibility(View.GONE);
+        } else {
+            initializePlayingControlsUI();
+        }
+
         DB db = new DB(getApplicationContext());
         musicListModelArrayList = new ArrayList<>();
 
-        for (Music music : db.getAllMusic()){
+        for (Music music : db.getAllMusic()) {
             musicListModelArrayList.add(new MusicListModel(music.getTitle(), music.getMusic()));
         }
+
+        mentalHelp.setMusicListModelList(musicListModelArrayList);
 
         // Check if there is data
         if (musicListModelArrayList.isEmpty()) {
@@ -78,12 +106,77 @@ public class MusicList extends AppCompatActivity {
             recyclerView.setAdapter(musicListAdapter);
             musicListAdapter.setOnSongClickListener(new MusicListAdapter.OnSongClick() {
                 @Override
-                public void songClick(MusicListModel musicListModel) {
-                    MentalHelp.getInstance().setMusicListModel(musicListModel);
+                public void songClick(MusicListModel musicListModel, int position) {
+                    mentalHelp.setMusicListModel(musicListModel, position);
                     Intent intent = new Intent(getApplicationContext(), Solitunes.class);
                     startActivity(intent);
+                    if (mentalHelp.musicState() != -1) {
+                        playingControls.setVisibility(View.VISIBLE);
+                        initializePlayingControlsUI();
+                    }
                 }
             });
+        }
+    }
+
+    public void initializePlayingControlsUI() {
+        musicTitle.setText(mentalHelp.getMusicListModel().getTitle());
+        pausePlay.setOnClickListener(v -> {
+            if (mentalHelp.musicState() == 1) {
+                pausePlay.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), R.drawable.play_button, getTheme()));
+                mentalHelp.musicPause();
+            } else {
+                pausePlay.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), R.drawable.play, getTheme()));
+                mentalHelp.musicPlay();
+            }
+        });
+
+        previousSong.setOnClickListener(v -> {
+            if (System.currentTimeMillis() - lastClickedPrevious < 2000) {
+                mentalHelp.previousMusic();
+                musicTitle.setText(mentalHelp.getMusicListModel().getTitle());
+                mentalHelp.musicPlay();
+            } else {
+                // keep track of lastClickedPrevious
+                lastClickedPrevious = System.currentTimeMillis();
+
+                // reset song
+                mentalHelp.setSongToPosition(0);
+            }
+        });
+
+        nextSong.setOnClickListener(v -> {
+            boolean successful = mentalHelp.nextMusic();
+            if (successful) {
+                musicTitle.setText(mentalHelp.getMusicListModel().getTitle());
+                mentalHelp.musicPlay();
+            } else {
+                Handler newHandler = new Handler();
+                newHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 500);
+            }
+        });
+        mentalHelp.setOnSongCompletionListener(new MentalHelp.OnSongCompletion() {
+            @Override
+            public void onSongCompletion() {
+                nextSong.performClick();
+            }
+        });
+        playingControls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Solitunes.class);
+                startActivity(intent);
+            }
+        });
+        if (mentalHelp.musicState() == 0) {
+            pausePlay.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), R.drawable.play_button, getTheme()));
+        } else {
+            pausePlay.setImageDrawable(ResourcesCompat.getDrawable(getApplicationContext().getResources(), R.drawable.play, getTheme()));
         }
 
     }
@@ -96,10 +189,18 @@ public class MusicList extends AppCompatActivity {
         // Handle the back arrow click
         if (id == android.R.id.home) {
             // Navigate back to previous activity or finish the current activity
-            onBackPressed();
+            getOnBackPressedDispatcher().onBackPressed();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mentalHelp.musicState() != -1) {
+            initializePlayingControlsUI();
+        }
     }
 }
