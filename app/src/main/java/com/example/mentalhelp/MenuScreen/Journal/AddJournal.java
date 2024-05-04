@@ -1,4 +1,4 @@
-package com.example.mentalhelp.MenuScreen;
+package com.example.mentalhelp.MenuScreen.Journal;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +20,11 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.example.mentalhelp.MenuScreen.Calendar;
+import com.example.mentalhelp.MenuScreen.DashBoard;
+import com.example.mentalhelp.MenuScreen.Settings;
 import com.example.mentalhelp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.sql.Date;
 
 public class AddJournal extends AppCompatActivity {
 

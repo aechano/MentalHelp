@@ -6,13 +6,18 @@ import static com.example.mentalhelp.Database.Database.DB_VERSION;
 import static com.example.mentalhelp.Database.Database.G_CONTENTS;
 import static com.example.mentalhelp.Database.Database.G_ID;
 import static com.example.mentalhelp.Database.Database.G_TITLE;
+import static com.example.mentalhelp.Database.Database.J_CONTENTS;
+import static com.example.mentalhelp.Database.Database.J_DATE_CREATED;
+import static com.example.mentalhelp.Database.Database.J_DATE_MODIFIED;
+import static com.example.mentalhelp.Database.Database.J_ID;
+import static com.example.mentalhelp.Database.Database.J_TITLE;
 import static com.example.mentalhelp.Database.Database.M_ID;
 import static com.example.mentalhelp.Database.Database.M_MUSIC;
 import static com.example.mentalhelp.Database.Database.M_TITLE;
 import static com.example.mentalhelp.Database.Database.TABLE_EVENTS;
 import static com.example.mentalhelp.Database.Database.TABLE_GUIDES;
 import static com.example.mentalhelp.Database.Database.TABLE_HAPPY_FIT;
-import static com.example.mentalhelp.Database.Database.TABLE_JOURNEY;
+import static com.example.mentalhelp.Database.Database.TABLE_JOURNAL;
 import static com.example.mentalhelp.Database.Database.TABLE_MUSIC;
 import static com.example.mentalhelp.Database.Database.TABLE_THEMES;
 import static com.example.mentalhelp.Database.Database.query1;
@@ -31,6 +36,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.mentalhelp.Database.Objects.Music;
 import com.example.mentalhelp.Model.GuideListModel;
+import com.example.mentalhelp.Model.JournalListModel;
 import com.example.mentalhelp.R;
 
 import java.util.ArrayList;
@@ -56,12 +62,13 @@ public class DB extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop the existing tables
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_JOURNEY);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_JOURNAL);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MUSIC);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_GUIDES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_HAPPY_FIT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_THEMES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENTS);
+        db.execSQL("DROP TABLE IF EXISTS journey");
 
         // trigger onCreate
         this.onCreate(db);
@@ -70,7 +77,8 @@ public class DB extends SQLiteOpenHelper {
     public void populateMusicTable() {
         List<Music> musicList = this.getAllMusic();
         int currentEntries = 5; //update this every time you insert new preset music.
-        if (musicList.size() == currentEntries) return; // if music table rows is equal to the current entries, stop the function.
+        if (musicList.size() == currentEntries)
+            return; // if music table rows is equal to the current entries, stop the function.
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -112,7 +120,8 @@ public class DB extends SQLiteOpenHelper {
     public void populateGuidesTable() {
         List<Music> musicList = this.getAllMusic();
         int currentEntries = 1; //update this every time you insert new preset music.
-        if (musicList.size() == currentEntries) return; // if music table rows is equal to the current entries, stop the function.
+        if (musicList.size() == currentEntries)
+            return; // if music table rows is equal to the current entries, stop the function.
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -137,11 +146,11 @@ public class DB extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                int ingredientID = cursor.getInt(cursor.getColumnIndex(M_ID));
+                int id = cursor.getInt(cursor.getColumnIndex(M_ID));
                 int music = cursor.getInt(cursor.getColumnIndex(M_MUSIC));
                 String musicTitle = cursor.getString(cursor.getColumnIndex(M_TITLE));
 
-                Music musicObject = new Music(ingredientID, music, musicTitle);
+                Music musicObject = new Music(id, music, musicTitle);
                 musicList.add(musicObject);
             } while (cursor.moveToNext());
         }
@@ -159,7 +168,6 @@ public class DB extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                int ingredientID = cursor.getInt(cursor.getColumnIndex(G_ID));
                 String contents = cursor.getString(cursor.getColumnIndex(G_CONTENTS));
                 String title = cursor.getString(cursor.getColumnIndex(G_TITLE));
 
@@ -169,6 +177,62 @@ public class DB extends SQLiteOpenHelper {
         }
         cursor.close();
         return guidesList;
+    }
+
+    public ArrayList<JournalListModel> getAllJournals() {
+        ArrayList<JournalListModel> journals = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_JOURNAL;
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Long id = cursor.getLong(cursor.getColumnIndex(J_ID));
+                String contents = cursor.getString(cursor.getColumnIndex(J_CONTENTS));
+                String title = cursor.getString(cursor.getColumnIndex(J_TITLE));
+                Long date_created = cursor.getLong(cursor.getColumnIndex(J_DATE_CREATED));
+                Long date_modified = cursor.getLong(cursor.getColumnIndex(J_DATE_MODIFIED));
+
+                JournalListModel journalObject = new JournalListModel(id, title, contents, date_created, date_modified);
+                journals.add(journalObject);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return journals;
+    }
+
+    public Long addJournal(String title, String content, Long dateCreated) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(J_TITLE, title);
+        values.put(J_CONTENTS, content);
+        values.put(J_DATE_CREATED, dateCreated);
+        values.put(J_DATE_MODIFIED, dateCreated);
+        return db.insertWithOnConflict(TABLE_JOURNAL, null, values, CONFLICT_IGNORE);
+    }
+
+    public Integer editJournal(Long id, String title, String content, Long dateModified) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(J_TITLE, title);
+        values.put(J_CONTENTS, content);
+        values.put(J_DATE_MODIFIED, dateModified);
+        Integer rowsAffected = db.update(TABLE_JOURNAL,
+                values,
+                J_ID + " = ? ",
+                new String[]{String.valueOf(id)});
+        if (rowsAffected == 0) return -1;
+        return rowsAffected;
+    }
+
+    public Integer deleteJournal(Long id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_JOURNAL,
+                J_ID + " = ?",
+                new String[]{String.valueOf(id)});
     }
 
     private Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {

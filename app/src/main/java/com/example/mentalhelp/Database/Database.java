@@ -2,11 +2,11 @@ package com.example.mentalhelp.Database;
 
 public interface Database {
     String DB_NAME = "mental_help.db";
-    Integer DB_VERSION = 4;
+    Integer DB_VERSION = 5;
 
     //TABLE 1 - Journal: journal_id, title, contents, date_created, date_modified
-    String TABLE_JOURNEY = "journey";
-    String J_ID = "journey_id"; //title, contents, date_created, date_modified
+    String TABLE_JOURNAL = "journal";
+    String J_ID = "journal_id"; //title, contents, date_created, date_modified
     String J_TITLE = "title";
     String J_CONTENTS = "contents";
     String J_DATE_CREATED = "date_created";
@@ -48,7 +48,7 @@ public interface Database {
     String E_ICON = "event_icon";
 
     //QUERIES
-    String query1 = "CREATE TABLE " + TABLE_JOURNEY + "("
+    String query1 = "CREATE TABLE " + TABLE_JOURNAL + "("
             + J_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + J_TITLE + " TEXT, "
             + J_CONTENTS + " TEXT, "
