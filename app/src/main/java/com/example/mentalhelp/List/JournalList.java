@@ -15,10 +15,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.mentalhelp.Adapter.JournalListAdapter;
 import com.example.mentalhelp.Model.JournalListModel;
 import com.example.mentalhelp.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -27,7 +29,9 @@ public class JournalList extends AppCompatActivity {
     RecyclerView recyclerView;
     JournalListAdapter journalListAdapter;
     ArrayList<JournalListModel> journalListModelArrayList;
-    private FrameLayout progressBar;
+    private TextView emptyTextView;
+    private FloatingActionButton fabAdd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +40,9 @@ public class JournalList extends AppCompatActivity {
 
         // Initialize your views
         recyclerView = findViewById(R.id.recyclerView);
-        progressBar = findViewById(R.id.progressBar);
+        emptyTextView = findViewById(R.id.emptyTextView);
+        fabAdd = findViewById(R.id.fab_add);
+
 
         // Set up your toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -64,12 +70,12 @@ public class JournalList extends AppCompatActivity {
 
         // Check if there is data
         if (journalListModelArrayList.isEmpty()) {
-            // If there is no data, show the progress bar and hide the RecyclerView
-            progressBar.setVisibility(View.VISIBLE);
+            // If there is no data, show the empty text and hide the RecyclerView
+            emptyTextView.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         } else {
-            // If there is data, hide the progress bar and show the RecyclerView
-            progressBar.setVisibility(View.GONE);
+            // If there is data, hide the empty text and show the RecyclerView
+            emptyTextView.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
 
             // Populate your RecyclerView with data
@@ -77,6 +83,16 @@ public class JournalList extends AppCompatActivity {
             journalListAdapter = new JournalListAdapter(journalListModelArrayList, this);
             recyclerView.setAdapter(journalListAdapter);
         }
+
+
+        // Set click listener for FAB
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle click event for adding content
+                // Add your logic here
+            }
+        });
     }
 
     @Override
