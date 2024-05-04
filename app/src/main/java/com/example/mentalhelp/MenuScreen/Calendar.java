@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -20,10 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mentalhelp.Adapter.CalendarAdapter;
+import com.example.mentalhelp.MenuScreen.Journal.AddJournal;
 import com.example.mentalhelp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;

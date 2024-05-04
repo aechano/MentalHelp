@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.example.mentalhelp.MenuScreen.Journal.AddJournal;
 import com.example.mentalhelp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

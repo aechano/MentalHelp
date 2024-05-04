@@ -1,4 +1,4 @@
-package com.example.mentalhelp.List;
+package com.example.mentalhelp.MenuScreen.Journal;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,13 +16,16 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mentalhelp.Adapter.JournalListAdapter;
+import com.example.mentalhelp.Database.DB;
 import com.example.mentalhelp.Model.JournalListModel;
 import com.example.mentalhelp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class JournalList extends AppCompatActivity {
 
@@ -59,19 +62,8 @@ public class JournalList extends AppCompatActivity {
         getSupportActionBar().setTitle(spannableString);
 
         // Initialize your list of journal entries
-        journalListModelArrayList = new ArrayList<>();
-
-        // Sample data for demonstration
-        journalListModelArrayList.add(new JournalListModel("This is a long Title that I created which can go beyond the card view", "10-20-24", "I am not Happy because there is a lot of gawain and I'm tired, want to go to sleep. Please let me finish this ngayong week na huhu kasi a lot of gawain is waiting pa"));
-        journalListModelArrayList.add(new JournalListModel("Their Title", "10-20-24", "I am Happy"));
-        journalListModelArrayList.add(new JournalListModel("Me Title", "10-20-24", "I am good"));
-        journalListModelArrayList.add(new JournalListModel("She Title", "10-20-24", "I am fabulous"));
-        journalListModelArrayList.add(new JournalListModel("He Title", "10-20-24", "I can do it"));
-        journalListModelArrayList.add(new JournalListModel("This is a long Title that I created which can go beyond the card view", "10-20-24", "I am not Happy because there is a lot of gawain and I'm tired, want to go to sleep. Please let me finish this ngayong week na huhu kasi a lot of gawain is waiting pa"));
-        journalListModelArrayList.add(new JournalListModel("Their Title", "10-20-24", "I am Happy"));
-        journalListModelArrayList.add(new JournalListModel("Me Title", "10-20-24", "I am good"));
-        journalListModelArrayList.add(new JournalListModel("She Title", "10-20-24", "I am fabulous"));
-        journalListModelArrayList.add(new JournalListModel("He Title", "10-20-24", "I can do it"));
+        DB db = new DB(getApplicationContext());
+        journalListModelArrayList = db.getAllJournals();
 
         // Check if there is data
         if (journalListModelArrayList.isEmpty()) {
@@ -87,6 +79,30 @@ public class JournalList extends AppCompatActivity {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             journalListAdapter = new JournalListAdapter(journalListModelArrayList, this);
             recyclerView.setAdapter(journalListAdapter);
+            journalListAdapter.setOnClickListener(new JournalListAdapter.OnClick() {
+                @Override
+                public void onClick(JournalListModel journalListModel) {
+
+                }
+
+                @Override
+                public void onEdit(JournalListModel journalListModel) {
+
+                }
+
+                @Override
+                public void onDelete(JournalListModel journalListModel, Integer position) {
+                    DB db = new DB(getApplicationContext());
+                    Integer rowsAffected = db.deleteJournal(journalListModel.getId());
+                    if (rowsAffected != 0) {
+                        Toast.makeText(getApplicationContext(),
+                                "Journal entry deleted successfully.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    journalListModelArrayList.remove((int) position);
+                    journalListAdapter.notifyDataSetChanged();
+                }
+            });
         }
 
 

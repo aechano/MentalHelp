@@ -1,12 +1,30 @@
 package com.example.mentalhelp.Model;
 
 public class JournalListModel {
-    String title, date, content;
+    Long id;
+    String title, content;
+    Long dateCreated, dateModified;
 
-    public JournalListModel(String title, String date, String content) {
+    public JournalListModel(String title, Long dateCreated, String content) {
         this.title = title;
-        this.date = date;
+        this.dateCreated = dateCreated;
         this.content = content;
+    }
+
+    public JournalListModel(Long id, String title, String content, Long dateCreated, Long dateModified) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -17,12 +35,12 @@ public class JournalListModel {
         this.title = title;
     }
 
-    public String getDate() {
-        return date;
+    public Long getDateCreated() {
+        return dateCreated;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDateCreated(Long dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public String getContent() {

@@ -31,13 +31,13 @@
             android:name=".MenuScreen.Solitunes.MusicList"
             android:exported="false" />
         <activity
-            android:name=".List.JournalList"
+            android:name=".MenuScreen.Journal.JournalList"
             android:exported="false" />
         <activity
             android:name=".MenuScreen.Settings"
             android:exported="false" />
         <activity
-            android:name=".MenuScreen.AddJournal"
+            android:name=".MenuScreen.Journal.AddJournal"
             android:exported="true" />
         <activity
             android:name=".MenuScreen.Calendar"
