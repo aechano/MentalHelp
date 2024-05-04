@@ -56,6 +56,12 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListAdapter.
                 return true;
             }
         });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClick.onClick(journalListModel);
+            }
+        });
 
     }
 
@@ -101,18 +107,12 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListAdapter.
     private void showEditDeleteDialog(JournalListModel journalListModel, Integer position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(String.format("%s", journalListModel.getTitle()));
-        builder.setItems(new CharSequence[]{"Edit", "Delete"}, new DialogInterface.OnClickListener() {
+        builder.setItems(new CharSequence[]{"Delete"}, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0: // Edit
-                        // Implement edit logic
-                        onClick.onEdit(journalListModel);
-                        break;
-                    case 1: // Delete
-                        // Implement delete logic
-                        onClick.onDelete(journalListModel, position);
-                        break;
+                if (which == 0) { // Delete
+                    // Implement delete logic
+                    onClick.onDelete(journalListModel, position);
                 }
             }
         });
@@ -121,7 +121,6 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListAdapter.
 
     public interface OnClick{
         void onClick(JournalListModel journalListModel);
-        void onEdit(JournalListModel journalListModel);
         void onDelete(JournalListModel journalListModel, Integer position);
     }
 }

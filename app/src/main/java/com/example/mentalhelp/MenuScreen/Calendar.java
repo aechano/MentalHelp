@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.mentalhelp.Adapter.CalendarAdapter;
 import com.example.mentalhelp.MenuScreen.Journal.AddJournal;
+import com.example.mentalhelp.MenuScreen.Journal.JournalList;
 import com.example.mentalhelp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -71,16 +73,19 @@ public class Calendar extends AppCompatActivity implements CalendarAdapter.OnIte
                 if (id == R.id.dashboard) {
                     startActivity(new Intent(getApplicationContext(), DashBoard.class));
                     overridePendingTransition(0, 0);
+                    finish();
                     return true;
-                }else if (id == R.id.calendar){
+                } else if (id == R.id.calendar) {
                     return true;
-                }else if (id == R.id.add){
+                } else if (id == R.id.add) {
                     startActivity(new Intent(getApplicationContext(), AddJournal.class));
                     overridePendingTransition(0, 0);
+                    finish();
                     return true;
-                }else if(id == R.id.settings){
+                } else if (id == R.id.settings) {
                     startActivity(new Intent(getApplicationContext(), Settings.class));
                     overridePendingTransition(0, 0);
+                    finish();
                     return true;
                 }
 
@@ -113,11 +118,10 @@ public class Calendar extends AppCompatActivity implements CalendarAdapter.OnIte
         int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
 
 
-        for(int i = 1; i <= 42; i++){
-            if(i <= dayOfWeek || i > daysInMonth + dayOfWeek){
+        for (int i = 1; i <= 42; i++) {
+            if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
                 daysInMonthArray.add("");
-            }
-            else{
+            } else {
                 daysInMonthArray.add(String.valueOf(i - dayOfWeek));
             }
         }
@@ -138,7 +142,7 @@ public class Calendar extends AppCompatActivity implements CalendarAdapter.OnIte
 
     @Override
     public void onItemClick(int position, String daytext) {
-        if(daytext.equals("")){
+        if (daytext.equals("")) {
             String message = "Selected Date" + daytext + " " + monthYearFromDate(localDate);
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }
@@ -154,5 +158,15 @@ public class Calendar extends AppCompatActivity implements CalendarAdapter.OnIte
     public void nextMonthAction(View view) {
         localDate = localDate.plusMonths(1);
         setMonthView();
+    }
+
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), DashBoard.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 }

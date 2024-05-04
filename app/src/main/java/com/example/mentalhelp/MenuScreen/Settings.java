@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -16,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.example.mentalhelp.MenuScreen.Journal.AddJournal;
+import com.example.mentalhelp.MenuScreen.Journal.JournalList;
 import com.example.mentalhelp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -73,15 +75,16 @@ public class Settings extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), DashBoard.class));
                     overridePendingTransition(0, 0);
                     return true;
-                }else if (id == R.id.calendar){
+                } else if (id == R.id.calendar) {
                     startActivity(new Intent(getApplicationContext(), Calendar.class));
                     overridePendingTransition(0, 0);
                     return true;
-                }else if (id == R.id.add){
+                } else if (id == R.id.add) {
                     startActivity(new Intent(getApplicationContext(), AddJournal.class));
                     overridePendingTransition(0, 0);
                     return true;
-                }else if(id == R.id.settings){;
+                } else if (id == R.id.settings) {
+                    ;
                     return true;
                 }
 
@@ -90,6 +93,15 @@ public class Settings extends AppCompatActivity {
 
             }
         });
+    }
 
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), DashBoard.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 }

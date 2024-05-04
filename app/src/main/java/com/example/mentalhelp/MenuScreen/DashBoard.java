@@ -83,28 +83,26 @@ public class DashBoard extends AppCompatActivity {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-
                 int id = item.getItemId(); // Get the selected item's ID
                 if (id == R.id.dashboard) {
                     return true;
                 }else if (id == R.id.calendar){
                     startActivity(new Intent(getApplicationContext(), Calendar.class));
                     overridePendingTransition(0, 0);
+                    finish();
                     return true;
                 }else if (id == R.id.add){
                     startActivity(new Intent(getApplicationContext(), AddJournal.class));
                     overridePendingTransition(0, 0);
+                    finish();
                     return true;
                 }else if(id == R.id.settings){
                     startActivity(new Intent(getApplicationContext(), Settings.class));
                     overridePendingTransition(0, 0);
+                    finish();
                     return true;
                 }
-
                 return false;
-
-
             }
         });
 

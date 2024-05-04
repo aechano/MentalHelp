@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -82,12 +83,14 @@ public class JournalList extends AppCompatActivity {
             journalListAdapter.setOnClickListener(new JournalListAdapter.OnClick() {
                 @Override
                 public void onClick(JournalListModel journalListModel) {
-
-                }
-
-                @Override
-                public void onEdit(JournalListModel journalListModel) {
-
+                    Intent intent = new Intent(getApplicationContext(), AddJournal.class);
+                    intent.putExtra("EDITING", journalListModel.getId());
+                    intent.putExtra("Title", journalListModel.getTitle());
+                    intent.putExtra("TimeCreated", journalListModel.getDateCreated());
+                    intent.putExtra("TimeModified", journalListModel.getDateModified());
+                    intent.putExtra("Content", journalListModel.getContent());
+                    startActivity(intent);
+                    finish();
                 }
 
                 @Override
@@ -110,8 +113,9 @@ public class JournalList extends AppCompatActivity {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle click event for adding content
-                // Add your logic here
+                Intent intent = new Intent(getApplicationContext(), AddJournal.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

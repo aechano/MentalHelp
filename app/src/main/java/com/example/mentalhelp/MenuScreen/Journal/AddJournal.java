@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -21,9 +22,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mentalhelp.Database.DB;
 import com.example.mentalhelp.LinedEditText;
 import com.example.mentalhelp.MenuScreen.Calendar;
 import com.example.mentalhelp.MenuScreen.DashBoard;
@@ -38,6 +41,7 @@ public class AddJournal extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     TextView dateText;
+    EditText title;
     LinedEditText linedEditTextExtra, noteContent;
 
     @Override
@@ -66,34 +70,44 @@ public class AddJournal extends AppCompatActivity {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-
                 int id = item.getItemId(); // Get the selected item's ID
                 if (id == R.id.dashboard) {
                     startActivity(new Intent(getApplicationContext(), DashBoard.class));
                     overridePendingTransition(0, 0);
+                    finish();
                     return true;
                 } else if (id == R.id.calendar) {
                     startActivity(new Intent(getApplicationContext(), Calendar.class));
                     overridePendingTransition(0, 0);
+                    finish();
                     return true;
                 } else if (id == R.id.add) {
                     return true;
                 } else if (id == R.id.settings) {
                     startActivity(new Intent(getApplicationContext(), Settings.class));
                     overridePendingTransition(0, 0);
+                    finish();
                     return true;
                 }
-
                 return false;
-
-
             }
         });
 
         dateText = findViewById(R.id.datetext);
         linedEditTextExtra = findViewById(R.id.extra_lines);
         noteContent = findViewById(R.id.note_text);
+        title = findViewById(R.id.editText);
+
+        if (getIntent().hasExtra("EDITING")){
+            Long dateCreated = getIntent().getLongExtra("TimeCreated", System.currentTimeMillis());
+            Long dateModified = getIntent().getLongExtra("TimeModified", 0L);
+            String titleString = getIntent().getStringExtra("Title");
+            String content = getIntent().getStringExtra("Content");
+            if (dateModified > dateCreated) dateText.setText(millisToDate(dateModified));
+            else dateText.setText(millisToDate(dateCreated));
+            title.setText(titleString);
+            noteContent.setText(content);
+        }
 
         linedEditTextExtra.setOnClickListener(v -> {
             noteContent.requestFocus();
@@ -124,7 +138,22 @@ public class AddJournal extends AppCompatActivity {
     }
 
     private void saveJournalEntry() {
-        // Implement the logic to save the journal entry here
+        DB db = new DB(getApplicationContext());
+        Long id = getIntent().getLongExtra("EDITING", -1L);
+        if (id == -1L) {
+            db.addJournal(title.getText().toString(), noteContent.getText().toString(), System.currentTimeMillis());
+            Toast.makeText(getApplicationContext(),
+                    "Journal saved!",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            db.editJournal(id, title.getText().toString(), noteContent.getText().toString(), System.currentTimeMillis());
+            Toast.makeText(getApplicationContext(),
+                    "Saved changes!",
+                    Toast.LENGTH_SHORT).show();
+        }
+        Intent intent = new Intent(getApplicationContext(), JournalList.class);
+        startActivity(intent);
+        finish();
     }
 
     private void showKeyboard(View view) {
@@ -149,5 +178,17 @@ public class AddJournal extends AppCompatActivity {
         // Construct the date string in desired format
 
         return String.format(Locale.getDefault(), "%s %d, %d", monthName, mDay, mYear);
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), DashBoard.class);
+        if (getIntent().hasExtra("EDITING")) {
+            intent = new Intent(getApplicationContext(), JournalList.class);
+        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 }

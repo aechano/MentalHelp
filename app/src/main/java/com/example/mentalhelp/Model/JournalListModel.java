@@ -43,6 +43,14 @@ public class JournalListModel {
         this.dateCreated = dateCreated;
     }
 
+    public Long getDateModified() {
+        return dateModified;
+    }
+
+    public void setDateModified(Long dateModified) {
+        this.dateModified = dateModified;
+    }
+
     public String getContent() {
         return content;
     }
