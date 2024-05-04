@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.mentalhelp.Adapter.GuideListAdapter;
 import com.example.mentalhelp.Database.DB;
@@ -31,7 +32,7 @@ public class GuideList extends AppCompatActivity implements GuideListAdapter.OnI
     RecyclerView recyclerView;
     GuideListAdapter guideListAdapter;
     ArrayList<GuideListModel> guideListModelArrayList;
-    private FrameLayout progressBar;
+    private TextView emptyTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class GuideList extends AppCompatActivity implements GuideListAdapter.OnI
 
         // Initialize your views
         recyclerView = findViewById(R.id.recyclerView);
-        progressBar = findViewById(R.id.progressBar);
+        emptyTextView = findViewById(R.id.emptyTextView);
 
         // Set up your toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -64,12 +65,12 @@ public class GuideList extends AppCompatActivity implements GuideListAdapter.OnI
 
         // Check if there is data
         if (guideListModelArrayList.isEmpty()) {
-            // If there is no data, show the progress bar and hide the RecyclerView
-            progressBar.setVisibility(View.VISIBLE);
+            // If there is no data, show the empty text and hide the RecyclerView
+            emptyTextView.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         } else {
-            // If there is data, hide the progress bar and show the RecyclerView
-            progressBar.setVisibility(View.GONE);
+            // If there is data, hide the empty text and show the RecyclerView
+            emptyTextView.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
 
             // Populate your RecyclerView with data

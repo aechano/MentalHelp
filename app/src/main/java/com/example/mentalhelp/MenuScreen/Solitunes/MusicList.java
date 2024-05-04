@@ -43,7 +43,7 @@ public class MusicList extends AppCompatActivity {
     CardView playingControls;
     Long lastClickedPrevious = 0L;
     MentalHelp mentalHelp;
-    private FrameLayout progressBar;
+    private TextView emptyTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class MusicList extends AppCompatActivity {
 
         // Initialize your views
         recyclerView = findViewById(R.id.recyclerView);
-        progressBar = findViewById(R.id.progressBar);
+        emptyTextView = findViewById(R.id.emptyTextView);
         musicTitle = findViewById(R.id.music_title);
         nextSong = findViewById(R.id.next_song);
         previousSong = findViewById(R.id.previous_song);
@@ -92,12 +92,12 @@ public class MusicList extends AppCompatActivity {
 
         // Check if there is data
         if (musicListModelArrayList.isEmpty()) {
-            // If there is no data, show the progress bar and hide the RecyclerView
-            progressBar.setVisibility(View.VISIBLE);
+            // If there is no data, show the empty text and hide the RecyclerView
+            emptyTextView.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         } else {
-            // If there is data, hide the progress bar and show the RecyclerView
-            progressBar.setVisibility(View.GONE);
+            // If there is data, hide the empty text and show the RecyclerView
+            emptyTextView.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
 
             // Populate your RecyclerView with data

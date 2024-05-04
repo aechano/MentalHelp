@@ -8,6 +8,13 @@
     <string name="definition">Meditation is like exercising your mind. In mindfulness meditation, you focus on your breath going in and out. When your mind drifts away, you notice and gently bring it back to your breath. This helps you stay in the present moment without judging yourself. It\'s a practice that takes time and patience to get better at.</string>
     <string name="def2">When you meditate, your sympathetic nervous system slows down. This system is responsible for your body\'s fight or flight response. So, meditation helps you feel more relaxed and less stressed.</string>
     <string name="def3">Here are some examples of beginner-friendly meditation techniques demonstrated in the following video.</string>
+    <string name="yogadef">According to the article of Nichols (2023), Yoga encompasses both physical and mental disciplines aimed at enhancing strength, flexibility, and overall well-being. Its diverse styles integrate postures, breathing exercises, and meditation to alleviate pain and alleviate stress.</string>
+    <string name="yogadef1">Here are some tips before starting yoga</string>
+    <string name="yogadef2">The following are some examples of beginner-friendly yoga tutorials:</string>
+
     <string name="how_meditation_works">How meditation works?</string>
     <string name="how_to_meditate">How to meditate?</string>
+    <string name="introduction_to_yoga">Introduction to Yoga</string>
+    <string name="things_to_know_before_starting_yoga">Things to know before starting yoga</string>
+    <string name="yoga_tutorials">Yoga Tutorials</string>
 </resources>

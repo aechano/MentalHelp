@@ -62,16 +62,16 @@ public class JournalList extends AppCompatActivity {
         journalListModelArrayList = new ArrayList<>();
 
         // Sample data for demonstration
-//        journalListModelArrayList.add(new JournalListModel("This is a long Title that I created which can go beyond the card view", "10-20-24", "I am not Happy because there is a lot of gawain and I'm tired, want to go to sleep. Please let me finish this ngayong week na huhu kasi a lot of gawain is waiting pa"));
-//        journalListModelArrayList.add(new JournalListModel("Their Title", "10-20-24", "I am Happy"));
-//        journalListModelArrayList.add(new JournalListModel("Me Title", "10-20-24", "I am good"));
-//        journalListModelArrayList.add(new JournalListModel("She Title", "10-20-24", "I am fabulous"));
-//        journalListModelArrayList.add(new JournalListModel("He Title", "10-20-24", "I can do it"));
-//        journalListModelArrayList.add(new JournalListModel("This is a long Title that I created which can go beyond the card view", "10-20-24", "I am not Happy because there is a lot of gawain and I'm tired, want to go to sleep. Please let me finish this ngayong week na huhu kasi a lot of gawain is waiting pa"));
-//        journalListModelArrayList.add(new JournalListModel("Their Title", "10-20-24", "I am Happy"));
-//        journalListModelArrayList.add(new JournalListModel("Me Title", "10-20-24", "I am good"));
-//        journalListModelArrayList.add(new JournalListModel("She Title", "10-20-24", "I am fabulous"));
-//        journalListModelArrayList.add(new JournalListModel("He Title", "10-20-24", "I can do it"));
+        journalListModelArrayList.add(new JournalListModel("This is a long Title that I created which can go beyond the card view", "10-20-24", "I am not Happy because there is a lot of gawain and I'm tired, want to go to sleep. Please let me finish this ngayong week na huhu kasi a lot of gawain is waiting pa"));
+        journalListModelArrayList.add(new JournalListModel("Their Title", "10-20-24", "I am Happy"));
+        journalListModelArrayList.add(new JournalListModel("Me Title", "10-20-24", "I am good"));
+        journalListModelArrayList.add(new JournalListModel("She Title", "10-20-24", "I am fabulous"));
+        journalListModelArrayList.add(new JournalListModel("He Title", "10-20-24", "I can do it"));
+        journalListModelArrayList.add(new JournalListModel("This is a long Title that I created which can go beyond the card view", "10-20-24", "I am not Happy because there is a lot of gawain and I'm tired, want to go to sleep. Please let me finish this ngayong week na huhu kasi a lot of gawain is waiting pa"));
+        journalListModelArrayList.add(new JournalListModel("Their Title", "10-20-24", "I am Happy"));
+        journalListModelArrayList.add(new JournalListModel("Me Title", "10-20-24", "I am good"));
+        journalListModelArrayList.add(new JournalListModel("She Title", "10-20-24", "I am fabulous"));
+        journalListModelArrayList.add(new JournalListModel("He Title", "10-20-24", "I can do it"));
 
         // Check if there is data
         if (journalListModelArrayList.isEmpty()) {

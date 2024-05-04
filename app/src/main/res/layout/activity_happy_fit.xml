@@ -109,6 +109,102 @@
                 android:layout_marginTop="5dp"
                 android:id="@+id/howtomed2"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/introduction_to_yoga"
+                android:fontFamily="@font/nunito_sans"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/yogadef"
+                android:fontFamily="@font/nunito_sans"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:gravity="start|top|end"
+                android:textSize="12sp"
+                android:layout_margin="10dp"/>
+
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="250sp"
+                android:id="@+id/YogaDef"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/things_to_know_before_starting_yoga"
+                android:fontFamily="@font/nunito_sans"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/yogadef1"
+                android:fontFamily="@font/nunito_sans"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:gravity="start|top|end"
+                android:textSize="12sp"
+                android:layout_margin="10dp"/>
+
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="250sp"
+                android:id="@+id/YogaDef1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/yoga_tutorials"
+                android:fontFamily="@font/nunito_sans"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/yogadef2"
+                android:fontFamily="@font/nunito_sans"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:gravity="start|top|end"
+                android:textSize="12sp"
+                android:layout_margin="10dp"/>
+
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="250sp"
+                android:id="@+id/yogatut1"/>
+
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="250sp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/yogatut2"/>
+
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="250sp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/yogatut3"/>
+
+
+
+
+
+
+
 
 
 
