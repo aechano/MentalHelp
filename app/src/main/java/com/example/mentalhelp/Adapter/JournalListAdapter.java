@@ -42,7 +42,7 @@ public class JournalListAdapter extends RecyclerView.Adapter<JournalListAdapter.
     @Override
     public void onBindViewHolder(@NonNull JournalListAdapter.ViewHolder holder, int position) {
         final JournalListModel journalListModel = journalListModels.get(position);
-        holder.jtitle.setText(journalListModel.getTitle());
+        holder.jtitle.setText(!"".equals(journalListModel.getTitle())?journalListModel.getTitle():"No Title");
 
         holder.jdate.setText(String.valueOf(millisToDate(journalListModel.getDateCreated())));
         holder.jcontent.setText(journalListModel.getContent());
