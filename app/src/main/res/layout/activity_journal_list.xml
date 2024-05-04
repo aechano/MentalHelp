@@ -39,22 +39,23 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="10dp"
         android:layout_margin="10dp"
+        android:layout_marginHorizontal="10dp"
         android:visibility="gone"
-        tools:listitem="@layout/journalist_view"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toTopOf="@id/fab_add" />
+        tools:layout_editor_absoluteX="10dp"
+        tools:listitem="@layout/journalist_view" />
 
     <!-- FloatingActionButton -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
         android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/deluge"
+        app:backgroundTint="@color/melrose"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
