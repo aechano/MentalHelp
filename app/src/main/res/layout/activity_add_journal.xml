@@ -7,13 +7,14 @@
     android:orientation="vertical"
     tools:context=".MenuScreen.Journal.AddJournal">
 
-    <!-- Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/melrose"
-        app:navigationIcon="?attr/homeAsUpIndicator" />
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:menu="@menu/menu_add_journal" />
+
 
     <EditText
         android:id="@+id/editText"

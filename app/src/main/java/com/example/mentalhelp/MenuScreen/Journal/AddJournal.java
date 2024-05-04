@@ -15,6 +15,7 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -68,13 +69,13 @@ public class AddJournal extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), DashBoard.class));
                     overridePendingTransition(0, 0);
                     return true;
-                }else if (id == R.id.calendar){
+                } else if (id == R.id.calendar) {
                     startActivity(new Intent(getApplicationContext(), Calendar.class));
                     overridePendingTransition(0, 0);
                     return true;
-                }else if (id == R.id.add){
+                } else if (id == R.id.add) {
                     return true;
-                }else if(id == R.id.settings){
+                } else if (id == R.id.settings) {
                     startActivity(new Intent(getApplicationContext(), Settings.class));
                     overridePendingTransition(0, 0);
                     return true;
@@ -97,20 +98,28 @@ public class AddJournal extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here
-        int id = item.getItemId();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_add_journal, menu);
+        return true;
+    }
 
-        // Handle the back arrow click
-        if (id == android.R.id.home) {
-            // Navigate back to previous activity or finish the current activity
-            getOnBackPressedDispatcher().onBackPressed();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_check) {
+            // Handle the click event for the check icon
+            saveJournalEntry();
+            return true;
+        } else if (id == android.R.id.home) {
+            onBackPressed();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
+    private void saveJournalEntry() {
+        // Implement the logic to save the journal entry here
+    }
 
     private void showKeyboard(View view) {
         InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
