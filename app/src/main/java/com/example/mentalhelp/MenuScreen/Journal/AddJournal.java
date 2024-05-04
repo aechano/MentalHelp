@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mentalhelp.LinedEditText;
 import com.example.mentalhelp.MenuScreen.Calendar;
@@ -28,6 +29,9 @@ import com.example.mentalhelp.MenuScreen.DashBoard;
 import com.example.mentalhelp.MenuScreen.Settings;
 import com.example.mentalhelp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.text.DateFormatSymbols;
+import java.util.Locale;
 
 public class AddJournal extends AppCompatActivity {
 
@@ -92,8 +96,10 @@ public class AddJournal extends AppCompatActivity {
 
         linedEditTextExtra.setOnClickListener(v -> {
             noteContent.requestFocus();
+            linedEditTextExtra.clearFocus();
             showKeyboard(noteContent);
         });
+        dateText.setText(millisToDate(System.currentTimeMillis()));
     }
 
     @Override
@@ -117,5 +123,22 @@ public class AddJournal extends AppCompatActivity {
         if (imm != null) {
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
         }
+    }
+
+    private String millisToDate(Long millis) {
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        calendar.setTimeInMillis(millis);
+
+        int mYear = calendar.get(java.util.Calendar.YEAR);
+        int mMonth = calendar.get(java.util.Calendar.MONTH);
+        int mDay = calendar.get(java.util.Calendar.DAY_OF_MONTH);
+
+        // Convert numeric month to month name
+        String[] monthNames = new DateFormatSymbols(Locale.ENGLISH).getMonths();
+        String monthName = monthNames[mMonth];
+
+        // Construct the date string in desired format
+
+        return String.format(Locale.getDefault(), "%s %d, %d", monthName, mDay, mYear);
     }
 }
