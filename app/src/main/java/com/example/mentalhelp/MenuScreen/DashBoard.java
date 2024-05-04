@@ -16,6 +16,7 @@ import android.view.WindowManager;
 
 import com.example.mentalhelp.MenuScreen.Guides.GuideList;
 import com.example.mentalhelp.List.JournalList;
+import com.example.mentalhelp.MenuScreen.HappyFit.HappyFit;
 import com.example.mentalhelp.MenuScreen.Solitunes.MusicList;
 import com.example.mentalhelp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -69,6 +70,14 @@ public class DashBoard extends AppCompatActivity {
                 startActivity(new Intent(DashBoard.this, GuideList.class));
             }
         });
+
+        findViewById(R.id.happyFit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashBoard.this, HappyFit.class));
+            }
+        });
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
             @Override

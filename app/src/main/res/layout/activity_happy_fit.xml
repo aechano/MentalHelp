@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MenuScreen.HappyFit.HappyFit">
+    
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/melrose"
+        app:navigationIcon="?attr/homeAsUpIndicator" />
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="WebViewLayout">
+            
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/introduction"
+                android:fontFamily="@font/nunito_sans"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/definition"
+                android:fontFamily="@font/nunito_sans"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:gravity="start|top|end"
+                android:textSize="12sp"
+                android:layout_margin="10dp"/>
+            
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="250sp"
+                android:id="@+id/medintro"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/how_meditation_works"
+                android:fontFamily="@font/nunito_sans"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/def2"
+                android:fontFamily="@font/nunito_sans"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:gravity="start|top|end"
+                android:textSize="12sp"
+                android:layout_margin="10dp"/>
+
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="250sp"
+                android:id="@+id/howmedworks"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/how_to_meditate"
+                android:fontFamily="@font/nunito_sans"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/def3"
+                android:fontFamily="@font/nunito_sans"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:gravity="start|top|end"
+                android:textSize="12sp"
+                android:layout_margin="10dp"/>
+
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="250sp"
+                android:id="@+id/howtomed"/>
+
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="250sp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/howtomed2"/>
+
+
+
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

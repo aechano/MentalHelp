@@ -1,10 +1,13 @@
 package com.example.mentalhelp.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +41,16 @@ public class JournalListAdapter extends RecyclerView.Adapter <JournalListAdapter
         holder.jdate.setText(journalListModel.getDate());
         holder.jcontent.setText(journalListModel.getContent());
 
+        // Set long press listener
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                // Show dialog box with edit and delete options
+                showEditDeleteDialog(journalListModel);
+                return true;
+            }
+        });
+
     }
 
     @Override
@@ -55,5 +68,26 @@ public class JournalListAdapter extends RecyclerView.Adapter <JournalListAdapter
             jdate = itemView.findViewById(R.id.date);
             jcontent = itemView.findViewById(R.id.content);
         }
+    }
+
+    private void showEditDeleteDialog(final JournalListModel journalListModel) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Options");
+        builder.setItems(new CharSequence[]{"Edit", "Delete"}, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0: // Edit
+                        // Implement edit logic
+                        Toast.makeText(context, "Edit clicked for: " + journalListModel.getTitle(), Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1: // Delete
+                        // Implement delete logic
+                        Toast.makeText(context, "Delete clicked for: " + journalListModel.getTitle(), Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
+        builder.create().show();
     }
 }

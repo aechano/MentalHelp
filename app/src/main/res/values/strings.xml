@@ -2,4 +2,12 @@
     <string name="app_name">MentalHelp</string>
     <string name="button1"><![CDATA[->]]></string>
     <string name="button0"><![CDATA[<-]]></string>
+
+    <!--HappyFit    -->
+    <string name="introduction">Introduction</string>
+    <string name="definition">Meditation is like exercising your mind. In mindfulness meditation, you focus on your breath going in and out. When your mind drifts away, you notice and gently bring it back to your breath. This helps you stay in the present moment without judging yourself. It\'s a practice that takes time and patience to get better at.</string>
+    <string name="def2">When you meditate, your sympathetic nervous system slows down. This system is responsible for your body\'s fight or flight response. So, meditation helps you feel more relaxed and less stressed.</string>
+    <string name="def3">Here are some examples of beginner-friendly meditation techniques demonstrated in the following video.</string>
+    <string name="how_meditation_works">How meditation works?</string>
+    <string name="how_to_meditate">How to meditate?</string>
 </resources>
