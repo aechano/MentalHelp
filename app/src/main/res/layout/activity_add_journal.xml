@@ -1,70 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MenuScreen.Journal.AddJournal">
 
     <!-- Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:background="@color/melrose"
         android:layout_height="?attr/actionBarSize"
-        app:navigationIcon="?attr/homeAsUpIndicator"/>
+        android:background="@color/melrose"
+        app:navigationIcon="?attr/homeAsUpIndicator" />
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edittext_background"
         android:layout_below="@id/toolbar"
-        android:padding="10dp"
+        android:background="@drawable/edittext_background"
+        android:fontFamily="@font/nunito_sans"
+        android:hint="This is the Title"
         android:inputType="text"
         android:maxLines="1"
-        android:hint="This is the Title"
+        android:padding="10dp"
         android:textColor="#333333"
-        android:textSize="24sp"
-        android:fontFamily="@font/nunito_sans" />
-    
+        android:textSize="24sp" />
+
     <TextView
         android:id="@+id/datetext"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/editText"
-        android:textColor="#333333"
         android:fontFamily="@font/nunito_sans"
-        android:textSize="16sp"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
-        android:text="Select Date"
-        />
+        android:text="May 7, 2024"
+        android:textColor="#AAAAAA"
+        android:textSize="16sp" />
 
-    <com.example.mentalhelp.LinedEditText
-        android:id="@+id/note_text"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/datetext"
-        android:layout_above="@id/bottomNav"
-        android:padding="16dp"
-        android:gravity="top"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:fontFamily="sans-serif"
-        android:inputType="textMultiLine" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <com.example.mentalhelp.LinedEditText
+                android:id="@+id/note_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="16dp"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <com.example.mentalhelp.LinedEditText
+                android:id="@+id/extra_lines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:enabled="false"
+                android:text="\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+                android:paddingHorizontal="16dp"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
         app:itemBackground="@color/melrose"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/menu" />
-
-</RelativeLayout>
+</LinearLayout>

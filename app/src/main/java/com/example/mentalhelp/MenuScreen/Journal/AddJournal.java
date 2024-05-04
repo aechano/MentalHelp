@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,9 +18,11 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.example.mentalhelp.LinedEditText;
 import com.example.mentalhelp.MenuScreen.Calendar;
 import com.example.mentalhelp.MenuScreen.DashBoard;
 import com.example.mentalhelp.MenuScreen.Settings;
@@ -29,9 +32,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class AddJournal extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-    private static final String TAG = "AddJournal";
-    private TextView mDisplayDate;
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    TextView dateText;
+    LinedEditText linedEditTextExtra, noteContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,6 @@ public class AddJournal extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNav);
         bottomNavigationView.setSelectedItemId(R.id.add);
-        mDisplayDate = findViewById(R.id.datetext);
 
         // Set up your toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -55,37 +56,6 @@ public class AddJournal extends AppCompatActivity {
         spannableString.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deluge)), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(spannableString);
-
-        mDisplayDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                java.util.Calendar cal = java.util.Calendar.getInstance();
-                int year = cal.get(java.util.Calendar.YEAR);
-                int month = cal.get(java.util.Calendar.MONTH);
-                int day = cal.get(java.util.Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog = new DatePickerDialog(
-                        AddJournal.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mDateSetListener,
-                        year,month,day
-                );
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
-
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month + 1;
-                Log.d(TAG, "onDateSet: date: " + year + "/" + month + "/" + dayOfMonth);
-
-                String date = month + "/" + dayOfMonth + "/" + year;
-                mDisplayDate.setText(date);
-
-            }
-        };
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -116,6 +86,14 @@ public class AddJournal extends AppCompatActivity {
             }
         });
 
+        dateText = findViewById(R.id.datetext);
+        linedEditTextExtra = findViewById(R.id.extra_lines);
+        noteContent = findViewById(R.id.note_text);
+
+        linedEditTextExtra.setOnClickListener(v -> {
+            noteContent.requestFocus();
+            showKeyboard(noteContent);
+        });
     }
 
     @Override
@@ -131,5 +109,13 @@ public class AddJournal extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private void showKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+        }
     }
 }
