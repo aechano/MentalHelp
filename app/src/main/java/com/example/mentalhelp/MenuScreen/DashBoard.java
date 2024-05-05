@@ -13,6 +13,7 @@ import android.text.style.StyleSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.mentalhelp.MenuScreen.Guides.GuideList;
 import com.example.mentalhelp.MenuScreen.Journal.AddJournal;
@@ -25,6 +26,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class DashBoard extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    Long onBackPressedMillis = 0L;
 
 
     @Override
@@ -86,17 +88,17 @@ public class DashBoard extends AppCompatActivity {
                 int id = item.getItemId(); // Get the selected item's ID
                 if (id == R.id.dashboard) {
                     return true;
-                }else if (id == R.id.calendar){
+                } else if (id == R.id.calendar) {
                     startActivity(new Intent(getApplicationContext(), Calendar.class));
                     overridePendingTransition(0, 0);
                     finish();
                     return true;
-                }else if (id == R.id.add){
+                } else if (id == R.id.add) {
                     startActivity(new Intent(getApplicationContext(), AddJournal.class));
                     overridePendingTransition(0, 0);
                     finish();
                     return true;
-                }else if(id == R.id.settings){
+                } else if (id == R.id.settings) {
                     startActivity(new Intent(getApplicationContext(), Settings.class));
                     overridePendingTransition(0, 0);
                     finish();
@@ -105,7 +107,16 @@ public class DashBoard extends AppCompatActivity {
                 return false;
             }
         });
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - onBackPressedMillis < 2000) {
+            super.onBackPressed();
+            System.exit(0);
+        } else {
+            Toast.makeText(getApplicationContext(), "Press again to exit.", Toast.LENGTH_SHORT).show();
+            onBackPressedMillis = System.currentTimeMillis();
+        }
     }
 }

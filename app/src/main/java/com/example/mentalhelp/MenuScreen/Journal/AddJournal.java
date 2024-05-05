@@ -66,6 +66,10 @@ public class AddJournal extends AppCompatActivity {
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deluge)), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(spannableString);
 
+        if (!getIntent().hasExtra("JOURNALLIST")){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        }
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
             @Override
@@ -107,6 +111,8 @@ public class AddJournal extends AppCompatActivity {
             else dateText.setText(millisToDate(dateCreated));
             title.setText(titleString);
             noteContent.setText(content);
+        } else {
+            dateText.setText(millisToDate(System.currentTimeMillis()));
         }
 
         linedEditTextExtra.setOnClickListener(v -> {
@@ -114,7 +120,6 @@ public class AddJournal extends AppCompatActivity {
             linedEditTextExtra.clearFocus();
             showKeyboard(noteContent);
         });
-        dateText.setText(millisToDate(System.currentTimeMillis()));
     }
 
     @Override
@@ -184,7 +189,7 @@ public class AddJournal extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), DashBoard.class);
-        if (getIntent().hasExtra("EDITING")) {
+        if (getIntent().hasExtra("JOURNALLIST")) {
             intent = new Intent(getApplicationContext(), JournalList.class);
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

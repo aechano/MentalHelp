@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.mentalhelp.Adapter.JournalListAdapter;
 import com.example.mentalhelp.Database.DB;
+import com.example.mentalhelp.MenuScreen.DashBoard;
 import com.example.mentalhelp.Model.JournalListModel;
 import com.example.mentalhelp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -84,6 +86,7 @@ public class JournalList extends AppCompatActivity {
                 @Override
                 public void onClick(JournalListModel journalListModel) {
                     Intent intent = new Intent(getApplicationContext(), AddJournal.class);
+                    intent.putExtra("JOURNALLIST", "");
                     intent.putExtra("EDITING", journalListModel.getId());
                     intent.putExtra("Title", journalListModel.getTitle());
                     intent.putExtra("TimeCreated", journalListModel.getDateCreated());
@@ -114,6 +117,7 @@ public class JournalList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddJournal.class);
+                intent.putExtra("JOURNALLIST", "");
                 startActivity(intent);
                 finish();
             }
@@ -135,4 +139,12 @@ public class JournalList extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), DashBoard.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
 }
