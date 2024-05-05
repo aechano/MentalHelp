@@ -68,6 +68,13 @@ public class Settings extends AppCompatActivity {
         // Set the toolbar title text
         getSupportActionBar().setTitle(spannableString);
 
+        findViewById(R.id.contact_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Settings.this, EmergencyContact.class));
+            }
+        });
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
             @Override

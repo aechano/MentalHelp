@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MentalHelp</string>
     <string name="button1"><![CDATA[->]]></string>
     <string name="button0"><![CDATA[<-]]></string>
@@ -17,4 +17,14 @@
     <string name="introduction_to_yoga">Introduction to Yoga</string>
     <string name="things_to_know_before_starting_yoga">Things to know before starting yoga</string>
     <string name="yoga_tutorials">Yoga Tutorials</string>
+    <string name="session">Free online Psychiatric Consultation Sessions in National Center for Mental Health</string>
+    <string name="link"><a href="bit.ly/ncmhkonsulta">bit.ly/ncmhkonsulta</a></string>
+    <string name="ncmh_crisis_hotlines">NCMH Crisis Hotlines \nLuzon-wide Landline Toll Free: 1553</string>
+    <string name="cellphone_lines" tools:ignore="TypographyDashes">Cellphone Lines:\n0917–899-8727, 0966-351-4518; 0908-639-2672</string>
+    <string name="outpatient_adult_services" tools:ignore="TypographyDashes">Outpatient (Adult) Services\nCellphone: 0999-396-3418\nLandline: 8-531-9001 Loc 1200\nEmail: ncmheconsultation@gmail.com</string>
+    <string name="online_registration">Online Registration: <a href="bit.ly/ncmhkonsulta">bit.ly/ncmhkonsulta</a></string>
+    <string name="outpatient_child_and_adolescent_services" tools:ignore="TypographyDashes">Outpatient (Child and Adolescent) Services\nLandline: 8-531-9001 Loc 383\nEmail: ncmhchildops@gmail.com</string>
+    <string name="women_and_child_protection_unit" tools:ignore="TypographyDashes">Women and Child Protection Unit\nLandline: 8-531-9001 Loc 309</string>
+    <string name="email_wcpu_ncmh_gov_ph">Email: wcpu@ncmh.gov.ph</string>
+    <string name="forensic_unit" tools:ignore="TypographyDashes">Forensic Unit\nLandline: 8-531-9001 Loc 320\nEmail: ncmhforensic@gmail.com</string>
 </resources>
