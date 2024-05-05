@@ -52,7 +52,7 @@ public class GuideList extends AppCompatActivity implements GuideListAdapter.OnI
         getWindow().setStatusBarColor(getResources().getColor(R.color.melrose));
 
         // Create a SpannableString for the title
-        SpannableString spannableString = new SpannableString("Guides");
+        SpannableString spannableString = new SpannableString("Wits' End");
         spannableString.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deluge)), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(spannableString);

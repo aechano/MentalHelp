@@ -119,7 +119,7 @@ public class DB extends SQLiteOpenHelper {
 
     public void populateGuidesTable() {
         List<Music> musicList = this.getAllMusic();
-        int currentEntries = 1; //update this every time you insert new preset music.
+        int currentEntries = 11; //update this every time you insert new preset music.
         if (musicList.size() == currentEntries)
             return; // if music table rows is equal to the current entries, stop the function.
 
@@ -130,10 +130,71 @@ public class DB extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         //first guide
-        values.put(G_CONTENTS, "anxiety.pdf");
-        values.put(G_TITLE, "How To Fight Anxiety?");
+        values.put(G_CONTENTS, "substance_use.pdf");
+        values.put(G_TITLE, "Substance Use Problems");
         db.insertWithOnConflict(TABLE_GUIDES, null, values, CONFLICT_IGNORE);
         values.clear();
+
+        //second guide
+        values.put(G_CONTENTS, "gambling_harm.pdf");
+        values.put(G_TITLE, "Gambling Harm");
+        db.insertWithOnConflict(TABLE_GUIDES, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //third guide
+        values.put(G_CONTENTS, "depression.pdf");
+        values.put(G_TITLE, "Depression");
+        db.insertWithOnConflict(TABLE_GUIDES, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //fourth guide
+        values.put(G_CONTENTS, "panic_attacks.pdf");
+        values.put(G_TITLE, "Panic Attacks");
+        db.insertWithOnConflict(TABLE_GUIDES, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //fifth guide
+        values.put(G_CONTENTS, "eating_disorders.pdf");
+        values.put(G_TITLE, "Eating Disorders");
+        db.insertWithOnConflict(TABLE_GUIDES, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //sixth guide
+        values.put(G_CONTENTS, "non_suicidal_injury.pdf");
+        values.put(G_TITLE, "Non-Suicidal Self-Injury");
+        db.insertWithOnConflict(TABLE_GUIDES, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //seventh guide
+        values.put(G_CONTENTS, "traumatic_events.pdf");
+        values.put(G_TITLE, "Traumatic Events (Adults)");
+        db.insertWithOnConflict(TABLE_GUIDES, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //eight guide
+        values.put(G_CONTENTS, "suicidal_thoughts.pdf");
+        values.put(G_TITLE, "Suicidal Thoughts and Behaviours");
+        db.insertWithOnConflict(TABLE_GUIDES, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //ninth guide
+        values.put(G_CONTENTS, "suicide.pdf");
+        values.put(G_TITLE, "Suicide First Aid Guidelines for the Philippines");
+        db.insertWithOnConflict(TABLE_GUIDES, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //tenth guide
+        values.put(G_CONTENTS, "lgbtq.pdf");
+        values.put(G_TITLE, "Considerations When Providing Mental Health First Aid to an LGBTIQ+ Person");
+        db.insertWithOnConflict(TABLE_GUIDES, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //eleventh guide
+        values.put(G_CONTENTS, "intellectual_disability.pdf");
+        values.put(G_TITLE, "Considerations When Offering Mental Health First Aid to a Person with an Intellectual Disability");
+        db.insertWithOnConflict(TABLE_GUIDES, null, values, CONFLICT_IGNORE);
+        values.clear();
+
     }
 
     public List<Music> getAllMusic() {

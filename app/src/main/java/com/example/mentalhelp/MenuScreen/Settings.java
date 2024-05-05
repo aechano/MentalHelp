@@ -3,8 +3,11 @@ package com.example.mentalhelp.MenuScreen;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -12,8 +15,10 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.example.mentalhelp.MenuScreen.Journal.AddJournal;
@@ -24,6 +29,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class Settings extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    CardView themeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +39,20 @@ public class Settings extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNav);
         bottomNavigationView.setSelectedItemId(R.id.settings);
 
+        // Find the theme view
+        themeView = findViewById(R.id.theme_view);
+
+        // Set OnClickListener to theme view
+        themeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Show AlertDialog with theme options
+                showThemeOptionsDialog();
+            }
+        });
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-
-        // Initialize the Spinner
-        Spinner spinner = findViewById(R.id.spinner_colors);
-        // Define the options
-        String[] colors = {"Rose", "Tropical Blue", "Goose", "ChromeWhite", "Sweetcorn"};
 
         // Set the status bar color to #2a07df
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -54,15 +67,6 @@ public class Settings extends AppCompatActivity {
 
         // Set the toolbar title text
         getSupportActionBar().setTitle(spannableString);
-
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, colors);
-
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -94,6 +98,26 @@ public class Settings extends AppCompatActivity {
             }
         });
     }
+
+    // Method to show AlertDialog with theme options
+    private void showThemeOptionsDialog() {
+        final String[] themes = {"Rose", "Tropical Blue", "Goose", "Chrome White", "Sweetcorn"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Please select a theme");
+
+        builder.setItems(themes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Handle theme selection here
+                String selectedTheme = themes[which];
+                // You can perform actions based on the selected theme
+            }
+        });
+
+        builder.show();
+    }
+
 
 
     @SuppressLint("MissingSuperCall")
