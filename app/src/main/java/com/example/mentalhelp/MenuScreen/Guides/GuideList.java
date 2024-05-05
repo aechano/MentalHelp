@@ -18,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.mentalhelp.Adapter.GuideListAdapter;
+import com.example.mentalhelp.Application.MentalHelp;
 import com.example.mentalhelp.Database.DB;
 import com.example.mentalhelp.Database.Objects.Music;
 import com.example.mentalhelp.MenuScreen.Guides.Guides;
@@ -36,6 +37,7 @@ public class GuideList extends AppCompatActivity implements GuideListAdapter.OnI
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(MentalHelp.getInstance().getCurrentTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_list);
 

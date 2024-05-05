@@ -12,6 +12,7 @@ import android.webkit.WebView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.mentalhelp.Application.MentalHelp;
 import com.example.mentalhelp.R;
 import com.github.barteksc.pdfviewer.PDFView;
 
@@ -21,6 +22,7 @@ public class Guides extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(MentalHelp.getInstance().getCurrentTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guides);
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="rose" parent="Theme.MentalHelp">
+        <item name="element">@color/rose_element</item>
+        <item name="background">@color/rose_bg</item>
+    </style>
+    <style name="tropical_blue" parent="Theme.MentalHelp">
+        <item name="element">@color/tropical_blue_element</item>
+        <item name="background">@color/tropical_blue_bg</item>
+    </style>
+    <style name="goose" parent="Theme.MentalHelp">
+        <item name="element">@color/goose_element</item>
+        <item name="background">@color/goose_bg</item>
+    </style>
+    <style name="chrome_white" parent="Theme.MentalHelp">
+        <item name="element">@color/chrome_white_element</item>
+        <item name="background">@color/chrome_white_bg</item>
+    </style>
+    <style name="sweetcorn" parent="Theme.MentalHelp">
+        <item name="element">@color/sweetcorn_element</item>
+        <item name="background">@color/sweetcorn_bg</item>
+    </style>
+    <style name="deluge" parent="Theme.MentalHelp">
+        <item name="element">@color/deluge_element</item>
+        <item name="background">@color/deluge_bg</item>
+    </style>
+</resources>

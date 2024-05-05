@@ -5,32 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mentalhelp.Application.MentalHelp;
 import com.example.mentalhelp.Database.DB;
-import com.example.mentalhelp.LinedEditText;
-import com.example.mentalhelp.MenuScreen.Calendar;
+import com.example.mentalhelp.CustomView.LinedEditText;
+import com.example.mentalhelp.MenuScreen.Calendar.Calendar;
 import com.example.mentalhelp.MenuScreen.DashBoard;
-import com.example.mentalhelp.MenuScreen.Settings;
+import com.example.mentalhelp.MenuScreen.Settings.Settings;
 import com.example.mentalhelp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -46,6 +42,7 @@ public class AddJournal extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(MentalHelp.getInstance().getCurrentTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_journal);
 

@@ -5,4 +5,22 @@
     <color name="deluge">#696CAF</color>
     <color name="hint">#808080</color>
     <color name="melrose">#CEBEF0</color>
+
+    <color name="sweetcorn_bg">#FFEE93</color>
+    <color name="sweetcorn_element">#EB5200</color>
+
+    <color name="chrome_white_bg">#B3DEE2</color>
+    <color name="chrome_white_element">#EAF2D7</color>
+
+    <color name="goose_bg">#E2E2E2</color>
+    <color name="goose_element">#7A7A7A</color>
+
+    <color name="tropical_blue_bg">#BDE0FE</color>
+    <color name="tropical_blue_element">#006FD6</color>
+
+    <color name="rose_bg">#FFC8DD</color>
+    <color name="rose_element">#EB0056</color>
+
+    <color name="deluge_bg">#CEBEF0</color>
+    <color name="deluge_element">#6366AB</color>
 </resources>

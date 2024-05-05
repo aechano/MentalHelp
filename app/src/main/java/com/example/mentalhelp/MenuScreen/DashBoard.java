@@ -15,10 +15,13 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.example.mentalhelp.Application.MentalHelp;
+import com.example.mentalhelp.MenuScreen.Calendar.Calendar;
 import com.example.mentalhelp.MenuScreen.Guides.GuideList;
 import com.example.mentalhelp.MenuScreen.Journal.AddJournal;
 import com.example.mentalhelp.MenuScreen.Journal.JournalList;
 import com.example.mentalhelp.MenuScreen.HappyFit.HappyFit;
+import com.example.mentalhelp.MenuScreen.Settings.Settings;
 import com.example.mentalhelp.MenuScreen.Solitunes.MusicList;
 import com.example.mentalhelp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -31,6 +34,7 @@ public class DashBoard extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(MentalHelp.getInstance().getCurrentTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
 

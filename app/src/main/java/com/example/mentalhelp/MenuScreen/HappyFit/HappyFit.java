@@ -13,12 +13,14 @@ import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
+import com.example.mentalhelp.Application.MentalHelp;
 import com.example.mentalhelp.R;
 
 public class HappyFit extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(MentalHelp.getInstance().getCurrentTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_happy_fit);
 

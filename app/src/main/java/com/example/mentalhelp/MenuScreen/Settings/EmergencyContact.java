@@ -1,4 +1,4 @@
-package com.example.mentalhelp.MenuScreen;
+package com.example.mentalhelp.MenuScreen.Settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -6,19 +6,29 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.TextView;
 
+import com.example.mentalhelp.Application.MentalHelp;
 import com.example.mentalhelp.R;
 
-public class AboutApp extends AppCompatActivity {
+public class EmergencyContact extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(MentalHelp.getInstance().getCurrentTheme());
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_app);
+        setContentView(R.layout.activity_emergency_contact);
+
+        TextView link1 = findViewById(R.id.link1);
+        link1.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView link2 = findViewById(R.id.link2);
+        link2.setMovementMethod(LinkMovementMethod.getInstance());
 
         // Set up your toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -29,7 +39,7 @@ public class AboutApp extends AppCompatActivity {
         getWindow().setStatusBarColor(getResources().getColor(R.color.melrose));
 
         // Create a SpannableString for the title
-        SpannableString spannableString = new SpannableString("About Mental Help");
+        SpannableString spannableString = new SpannableString("Emergency Contact");
         spannableString.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deluge)), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(spannableString);

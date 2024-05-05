@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mentalhelp.Adapter.JournalListAdapter;
+import com.example.mentalhelp.Application.MentalHelp;
 import com.example.mentalhelp.Database.DB;
 import com.example.mentalhelp.MenuScreen.DashBoard;
 import com.example.mentalhelp.Model.JournalListModel;
@@ -41,6 +42,7 @@ public class JournalList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(MentalHelp.getInstance().getCurrentTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journal_list);
 

@@ -1,4 +1,4 @@
-package com.example.mentalhelp.MenuScreen;
+package com.example.mentalhelp.MenuScreen.Calendar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,8 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mentalhelp.Adapter.CalendarAdapter;
+import com.example.mentalhelp.Application.MentalHelp;
+import com.example.mentalhelp.MenuScreen.DashBoard;
 import com.example.mentalhelp.MenuScreen.Journal.AddJournal;
-import com.example.mentalhelp.MenuScreen.Journal.JournalList;
+import com.example.mentalhelp.MenuScreen.Settings.Settings;
 import com.example.mentalhelp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -40,6 +42,7 @@ public class Calendar extends AppCompatActivity implements CalendarAdapter.OnIte
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(MentalHelp.getInstance().getCurrentTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 

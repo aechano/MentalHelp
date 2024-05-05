@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.mentalhelp.Model.MusicListModel;
+import com.example.mentalhelp.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class MentalHelp extends Application {
     List<MusicListModel> musicListModelList;
     static MentalHelp instance;
     Boolean havePlayed = false;
+    int currentTheme = 0;
 
     @Override
     public void onCreate() {
@@ -26,6 +28,7 @@ public class MentalHelp extends Application {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         instance = this;
         musicListModelList = new ArrayList<>();
+        currentTheme = R.style.deluge;
     }
 
     public void setMusicListModel(MusicListModel musicListModel, int position) {
@@ -112,6 +115,43 @@ public class MentalHelp extends Application {
             mediaPlayer.start();
             havePlayed = true;
         }
+    }
+
+    public int getCurrentTheme() {
+        return currentTheme;
+    }
+
+    public void changeTheme(Themes themes) {
+        switch (themes) {
+            case ROSE:
+                setTheme(R.style.rose);
+                currentTheme = R.style.rose;
+                break;
+            case TROPICAL_BLUE:
+                setTheme(R.style.tropical_blue);
+                currentTheme = R.style.tropical_blue;
+                break;
+            case GOOSE:
+                setTheme(R.style.goose);
+                currentTheme = R.style.goose;
+                break;
+            case CHROME_WHITE:
+                setTheme(R.style.chrome_white);
+                currentTheme = R.style.chrome_white;
+                break;
+            case SWEETCORN:
+                setTheme(R.style.sweetcorn);
+                currentTheme = R.style.sweetcorn;
+                break;
+            case DELUGE:
+                setTheme(R.style.deluge);
+                currentTheme = R.style.deluge;
+                break;
+        }
+    }
+
+    public enum Themes {
+        ROSE, TROPICAL_BLUE, GOOSE, CHROME_WHITE, SWEETCORN, DELUGE
     }
 
     // Pausing the music

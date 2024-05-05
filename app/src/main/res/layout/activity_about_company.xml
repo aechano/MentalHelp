@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MenuScreen.AboutCompany">
+    tools:context=".MenuScreen.Settings.AboutCompany">
 
     <!-- Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/melrose"
+        android:background="?background"
         app:navigationIcon="?attr/homeAsUpIndicator" />
 
     <ScrollView

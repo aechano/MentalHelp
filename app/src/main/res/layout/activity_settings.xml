@@ -5,14 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuScreen.Settings">
+    tools:context=".MenuScreen.Settings.Settings">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:fontFamily="@font/nunito_sans"
-        android:background="@color/melrose"
+        android:background="?background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -31,7 +31,7 @@
             android:id="@+id/theme_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/melrose"
+            app:cardBackgroundColor="?background"
             app:cardCornerRadius="10dp"
             android:layout_marginBottom="10dp"
             app:cardElevation="3dp">
@@ -68,7 +68,7 @@
             android:id="@+id/about_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/melrose"
+            app:cardBackgroundColor="?background"
             app:cardCornerRadius="10dp"
             android:layout_marginBottom="10dp"
             app:cardElevation="3dp">
@@ -105,7 +105,7 @@
             android:id="@+id/app_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/melrose"
+            app:cardBackgroundColor="?background"
             app:cardCornerRadius="10dp"
             android:layout_marginBottom="10dp"
             app:cardElevation="3dp">
@@ -142,7 +142,7 @@
             android:id="@+id/contact_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/melrose"
+            app:cardBackgroundColor="?background"
             app:cardCornerRadius="10dp"
             android:layout_marginBottom="10dp"
             app:cardElevation="3dp">
@@ -184,9 +184,9 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
-        app:itemBackground="@color/melrose"
-        app:itemIconTint="@drawable/selector"
-        app:itemTextColor="@drawable/selector"
+        app:itemBackground="?background"
+        app:itemIconTint="?element"
+        app:itemTextColor="?element"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/menu" />
 

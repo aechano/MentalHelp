@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/deluge"
+    android:background="?element"
     tools:context=".MenuScreen.Solitunes.Solitunes">
 
     <!-- Toolbar -->
@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/melrose"
+        android:background="?background"
         app:navigationIcon="?attr/homeAsUpIndicator" />
 
     <TextView

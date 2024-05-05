@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.mentalhelp.Application.MentalHelp;
+import com.example.mentalhelp.Application.MentalHelp.Themes;
 import com.example.mentalhelp.Database.DB;
 import com.example.mentalhelp.MenuScreen.DashBoard;
 
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         // run loading processes
         initializeDatabase();
+        initializeTheme();
 
         // Load GIF into the View
         ImageView logoView = findViewById(R.id.logoView); // Change View to ImageView
@@ -49,5 +52,26 @@ public class MainActivity extends AppCompatActivity {
         db = new DB(getApplicationContext());
         db.populateMusicTable();
         db.populateGuidesTable();
+        db.populateTheme();
+    }
+
+    private void initializeTheme() {
+        db = new DB(getApplicationContext());
+        String theme = db.getTheme();
+        if (!"DEFAULT".equals(theme)) {
+            if (Themes.ROSE.name().equals(theme)) {
+                MentalHelp.getInstance().changeTheme(Themes.ROSE);
+            } else if (Themes.TROPICAL_BLUE.name().equals(theme)) {
+                MentalHelp.getInstance().changeTheme(Themes.TROPICAL_BLUE);
+            } else if (Themes.CHROME_WHITE.name().equals(theme)) {
+                MentalHelp.getInstance().changeTheme(Themes.CHROME_WHITE);
+            } else if (Themes.GOOSE.name().equals(theme)) {
+                MentalHelp.getInstance().changeTheme(Themes.GOOSE);
+            } else if (Themes.SWEETCORN.name().equals(theme)) {
+                MentalHelp.getInstance().changeTheme(Themes.SWEETCORN);
+            } else if (Themes.DELUGE.name().equals(theme)) {
+                MentalHelp.getInstance().changeTheme(Themes.DELUGE);
+            }
+        }
     }
 }

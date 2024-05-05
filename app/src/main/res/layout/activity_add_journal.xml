@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/melrose"
+        android:background="?background"
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:menu="@menu/menu_add_journal" />
 
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.example.mentalhelp.LinedEditText
+            <com.example.mentalhelp.CustomView.LinedEditText
                 android:id="@+id/note_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
-            <com.example.mentalhelp.LinedEditText
+            <com.example.mentalhelp.CustomView.LinedEditText
                 android:id="@+id/extra_lines"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,9 +84,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="0dp"
-        app:itemBackground="@color/melrose"
-        app:itemIconTint="@drawable/selector"
-        app:itemTextColor="@drawable/selector"
+        app:itemBackground="?background"
+        app:itemIconTint="?element"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/menu" />
 </LinearLayout>

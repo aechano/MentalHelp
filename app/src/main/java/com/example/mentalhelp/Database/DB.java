@@ -4,7 +4,6 @@ import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
 import static com.example.mentalhelp.Database.Database.DB_NAME;
 import static com.example.mentalhelp.Database.Database.DB_VERSION;
 import static com.example.mentalhelp.Database.Database.G_CONTENTS;
-import static com.example.mentalhelp.Database.Database.G_ID;
 import static com.example.mentalhelp.Database.Database.G_TITLE;
 import static com.example.mentalhelp.Database.Database.J_CONTENTS;
 import static com.example.mentalhelp.Database.Database.J_DATE_CREATED;
@@ -14,18 +13,16 @@ import static com.example.mentalhelp.Database.Database.J_TITLE;
 import static com.example.mentalhelp.Database.Database.M_ID;
 import static com.example.mentalhelp.Database.Database.M_MUSIC;
 import static com.example.mentalhelp.Database.Database.M_TITLE;
-import static com.example.mentalhelp.Database.Database.TABLE_EVENTS;
 import static com.example.mentalhelp.Database.Database.TABLE_GUIDES;
-import static com.example.mentalhelp.Database.Database.TABLE_HAPPY_FIT;
 import static com.example.mentalhelp.Database.Database.TABLE_JOURNAL;
 import static com.example.mentalhelp.Database.Database.TABLE_MUSIC;
 import static com.example.mentalhelp.Database.Database.TABLE_THEMES;
+import static com.example.mentalhelp.Database.Database.T_DETAILS;
+import static com.example.mentalhelp.Database.Database.T_ID;
 import static com.example.mentalhelp.Database.Database.query1;
 import static com.example.mentalhelp.Database.Database.query2;
 import static com.example.mentalhelp.Database.Database.query3;
-import static com.example.mentalhelp.Database.Database.query4;
 import static com.example.mentalhelp.Database.Database.query5;
-import static com.example.mentalhelp.Database.Database.query6;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -54,9 +51,7 @@ public class DB extends SQLiteOpenHelper {
         db.execSQL(query1);
         db.execSQL(query2);
         db.execSQL(query3);
-        db.execSQL(query4);
         db.execSQL(query5);
-        db.execSQL(query6);
     }
 
     @Override
@@ -65,9 +60,7 @@ public class DB extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_JOURNAL);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MUSIC);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_GUIDES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HAPPY_FIT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_THEMES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENTS);
         db.execSQL("DROP TABLE IF EXISTS journey");
 
         // trigger onCreate
@@ -197,6 +190,21 @@ public class DB extends SQLiteOpenHelper {
 
     }
 
+    public void populateTheme(){
+        if (!getTheme().isEmpty())
+            return; // if music table rows is equal to the current entries, stop the function.
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_THEMES, null, null);
+
+        ContentValues values = new ContentValues();
+
+        values.put(T_DETAILS, "DEFAULT");
+
+        db.insertWithOnConflict(TABLE_THEMES, null, values, CONFLICT_IGNORE);
+    }
+
     public List<Music> getAllMusic() {
 
         List<Music> musicList = new ArrayList<>();
@@ -281,7 +289,7 @@ public class DB extends SQLiteOpenHelper {
         values.put(J_TITLE, title);
         values.put(J_CONTENTS, content);
         values.put(J_DATE_MODIFIED, dateModified);
-        Integer rowsAffected = db.update(TABLE_JOURNAL,
+        int rowsAffected = db.update(TABLE_JOURNAL,
                 values,
                 J_ID + " = ? ",
                 new String[]{String.valueOf(id)});
@@ -289,11 +297,40 @@ public class DB extends SQLiteOpenHelper {
         return rowsAffected;
     }
 
-    public Integer deleteJournal(Long id){
+    public Integer deleteJournal(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_JOURNAL,
                 J_ID + " = ?",
                 new String[]{String.valueOf(id)});
+    }
+
+    public String getTheme() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_THEMES + " WHERE " + T_ID + "=1;";
+        Cursor cursor = db.rawQuery(query, null);
+
+        String theme = "";
+
+        if (cursor.moveToFirst()) {
+            do {
+                theme = cursor.getString(cursor.getColumnIndex(T_DETAILS));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return theme;
+    }
+
+    public Integer setTheme(String theme) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(T_DETAILS, theme);
+        int rowsAffected = db.update(TABLE_THEMES,
+                values,
+                T_ID + " = ? ",
+                new String[]{String.valueOf(1)});
+        if (rowsAffected == 0) return -1;
+        return rowsAffected;
     }
 
     private Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {

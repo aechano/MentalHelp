@@ -1,6 +1,7 @@
-package com.example.mentalhelp.MenuScreen;
+package com.example.mentalhelp.MenuScreen.Settings;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -9,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -17,12 +19,13 @@ import android.text.style.StyleSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.mentalhelp.Application.MentalHelp;
+import com.example.mentalhelp.Database.DB;
+import com.example.mentalhelp.MenuScreen.Calendar.Calendar;
+import com.example.mentalhelp.MenuScreen.DashBoard;
 import com.example.mentalhelp.MenuScreen.Journal.AddJournal;
-import com.example.mentalhelp.MenuScreen.Journal.JournalList;
 import com.example.mentalhelp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -31,8 +34,10 @@ public class Settings extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     CardView themeView;
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(MentalHelp.getInstance().getCurrentTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
@@ -122,7 +127,7 @@ public class Settings extends AppCompatActivity {
 
     // Method to show AlertDialog with theme options
     private void showThemeOptionsDialog() {
-        final String[] themes = {"Rose", "Tropical Blue", "Goose", "Chrome White", "Sweetcorn"};
+        final String[] themes = {"Deluge (Default)", "Rose", "Tropical Blue", "Goose", "Chrome White", "Sweetcorn"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Please select a theme");
@@ -131,11 +136,33 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Handle theme selection here
+                DB db = new DB(getApplicationContext());
                 String selectedTheme = themes[which];
                 // You can perform actions based on the selected theme
+                if ("Deluge (Default)".equals(selectedTheme)){
+                    db.setTheme(MentalHelp.Themes.DELUGE.name());
+                    MentalHelp.getInstance().changeTheme(MentalHelp.Themes.DELUGE);
+                } else if ("Rose".equals(selectedTheme)){
+                    db.setTheme(MentalHelp.Themes.ROSE.name());
+                    MentalHelp.getInstance().changeTheme(MentalHelp.Themes.ROSE);
+                } else if ("Tropical Blue".equals(selectedTheme)){
+                    db.setTheme(MentalHelp.Themes.TROPICAL_BLUE.name());
+                    MentalHelp.getInstance().changeTheme(MentalHelp.Themes.TROPICAL_BLUE);
+                } else if ("Goose".equals(selectedTheme)){
+                    db.setTheme(MentalHelp.Themes.GOOSE.name());
+                    MentalHelp.getInstance().changeTheme(MentalHelp.Themes.GOOSE);
+                } else if ("Chrome White".equals(selectedTheme)){
+                    db.setTheme(MentalHelp.Themes.CHROME_WHITE.name());
+                    MentalHelp.getInstance().changeTheme(MentalHelp.Themes.CHROME_WHITE);
+                } else if ("Sweetcorn".equals(selectedTheme)){
+                    db.setTheme(MentalHelp.Themes.SWEETCORN.name());
+                    MentalHelp.getInstance().changeTheme(MentalHelp.Themes.SWEETCORN);
+                }
+                Toast.makeText(getApplicationContext(), "Theme changed!", Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(new Intent(getApplicationContext(), Settings.class));
             }
         });
-
         builder.show();
     }
 

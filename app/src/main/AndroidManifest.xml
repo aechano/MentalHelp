@@ -16,13 +16,13 @@
         android:theme="@style/Theme.MentalHelp"
         tools:targetApi="31">
         <activity
-            android:name=".MenuScreen.AboutApp"
+            android:name=".MenuScreen.Settings.AboutApp"
             android:exported="false" />
         <activity
-            android:name=".MenuScreen.AboutCompany"
+            android:name=".MenuScreen.Settings.AboutCompany"
             android:exported="true" />
         <activity
-            android:name=".MenuScreen.EmergencyContact"
+            android:name=".MenuScreen.Settings.EmergencyContact"
             android:exported="true" />
         <activity
             android:name=".MenuScreen.HappyFit.HappyFit"
@@ -43,13 +43,13 @@
             android:name=".MenuScreen.Journal.JournalList"
             android:exported="false" />
         <activity
-            android:name=".MenuScreen.Settings"
+            android:name=".MenuScreen.Settings.Settings"
             android:exported="false" />
         <activity
             android:name=".MenuScreen.Journal.AddJournal"
             android:exported="true" />
         <activity
-            android:name=".MenuScreen.Calendar"
+            android:name=".MenuScreen.Calendar.Calendar"
             android:exported="false" />
         <activity
             android:name=".MenuScreen.DashBoard"

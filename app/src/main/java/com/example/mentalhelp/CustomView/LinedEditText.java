@@ -1,4 +1,4 @@
-package com.example.mentalhelp;
+package com.example.mentalhelp.CustomView;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -1,4 +1,4 @@
-package com.example.mentalhelp.MenuScreen;
+package com.example.mentalhelp.MenuScreen.Settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,12 +11,14 @@ import android.text.style.StyleSpan;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import com.example.mentalhelp.Application.MentalHelp;
 import com.example.mentalhelp.R;
 
 public class AboutCompany extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(MentalHelp.getInstance().getCurrentTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_company);
 

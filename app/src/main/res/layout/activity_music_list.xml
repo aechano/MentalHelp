@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/melrose"
+            android:background="?background"
             app:navigationIcon="?attr/homeAsUpIndicator" />
 
         <!-- TextView -->
@@ -53,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        app:cardBackgroundColor="@color/melrose">
+        app:cardBackgroundColor="?background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -67,6 +67,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:src="@drawable/sound_icon"
+                app:tint="?element"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -93,6 +94,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/previous"
+                app:tint="?element"
                 app:layout_constraintStart_toEndOf="@+id/music_title"
                 app:layout_constraintTop_toTopOf="@+id/music_title"
                 app:layout_constraintBottom_toBottomOf="@+id/music_title" />
@@ -102,6 +104,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/play"
+                app:tint="?element"
                 app:layout_constraintStart_toEndOf="@+id/previous_song"
                 app:layout_constraintTop_toTopOf="@+id/music_title"
                 app:layout_constraintBottom_toBottomOf="@+id/music_title" />
@@ -112,6 +115,7 @@
                 android:layout_height="30dp"
                 android:src="@drawable/next_button"
                 android:layout_marginEnd="10dp"
+                app:tint="?element"
                 app:layout_constraintStart_toEndOf="@+id/pause_play"
                 app:layout_constraintTop_toTopOf="@+id/music_title"
                 app:layout_constraintBottom_toBottomOf="@+id/music_title"
