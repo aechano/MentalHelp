@@ -17,6 +17,9 @@
     <string name="introduction_to_yoga">Introduction to Yoga</string>
     <string name="things_to_know_before_starting_yoga">Things to know before starting yoga</string>
     <string name="yoga_tutorials">Yoga Tutorials</string>
+
+
+    <!-- Contacts   -->
     <string name="session">Free online Psychiatric Consultation Sessions in National Center for Mental Health</string>
     <string name="link"><a href="bit.ly/ncmhkonsulta">bit.ly/ncmhkonsulta</a></string>
     <string name="ncmh_crisis_hotlines">NCMH Crisis Hotlines \nLuzon-wide Landline Toll Free: 1553</string>
@@ -27,4 +30,15 @@
     <string name="women_and_child_protection_unit" tools:ignore="TypographyDashes">Women and Child Protection Unit\nLandline: 8-531-9001 Loc 309</string>
     <string name="email_wcpu_ncmh_gov_ph">Email: wcpu@ncmh.gov.ph</string>
     <string name="forensic_unit" tools:ignore="TypographyDashes">Forensic Unit\nLandline: 8-531-9001 Loc 320\nEmail: ncmhforensic@gmail.com</string>
+
+    <!-- About Company  -->
+    <string name="company">MentalHelp Tech Company is a mental health clinic situated in Sta. Rosa, Laguna, is also a technology company that created a mental health application offering journaling, meditation music, mental health first aid and yoga videos. The company was established by three sole founders during their undergraduate studies in 2024, driven by a desire to develop an accessible app to support students\' psychological well-being. Ms. Maricon Asilo conceived the idea of a journaling app and mental health first aid, Ms. Jessica Aumentado proposed the inclusion of meditative music and sound features, and Ms. Sheila Batac suggested incorporating yoga practices for added variety. With the collaboration of their college group members: Ms. Karlene Agcaoili, Ms. Cale Anuran, Ms. Chezka Jane Aquino, Ms. Aliah Kyle Araneta, Ms. Alliah Atole, Ms. Francesca Cassandra Ayag, Ms. Lovely Mae Sayangco, and Mr. Jadd Ridad. They successfully developed the app with the help of IT students from Camarines Norte State College, Mr. Angelo M. Echano and Mx. Kai L. Yaneza. The developers managed to complete the development process, including design, coding, and testing, within just one month. The application was crafted using Java language and incorporated an SQLite database. Despite facing challenges such as time constraints and busy schedules during development, the Mental Help Application is poised to fulfill its primary objective of aiding students\' psychological wellness.</string>
+
+    <!-- About App -->
+    <string name="intro">The Mental Help app is designed to provide holistic support for mental health and well-being. Whether you’re dealing with stress, anxiety, or simply want to maintain a positive mindset, this app offers a range of tools to help you on your journey.</string>
+    <string name="hiddenBlues">Express your thoughts and feelings through digital journaling. Writing down your experiences, emotions, and reflections can be therapeutic. The app allows you to create private entries, set reminders, and track your progress over time.</string>
+    <string name="solitunes">Music has a powerful impact on our mood and emotions. The app provides curated playlists for relaxation, focus, and motivation. Whether you prefer calming melodies, upbeat tunes, or soothing sounds, you’ll find something to lift your spirits.</string>
+    <string name="WitEnd">In moments of crisis or distress, having quick access to coping strategies is essential. The mental first aid kit includes breathing exercises, grounding techniques, and positive affirmations. Use it whenever you need immediate support.</string>
+    <string name="HappyFit">Physical activity plays a crucial role in mental well-being. The app offers guided yoga exercises suitable for all levels. From gentle stretches to more advanced poses, you can practice mindfulness, improve flexibility, and reduce stress.</string>
+
 </resources>

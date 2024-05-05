@@ -75,6 +75,20 @@ public class Settings extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.about_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Settings.this, AboutCompany.class));
+            }
+        });
+
+        findViewById(R.id.app_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Settings.this, AboutApp.class));
+            }
+        });
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
             @Override

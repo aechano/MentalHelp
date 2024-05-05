@@ -16,6 +16,12 @@
         android:theme="@style/Theme.MentalHelp"
         tools:targetApi="31">
         <activity
+            android:name=".MenuScreen.AboutApp"
+            android:exported="false" />
+        <activity
+            android:name=".MenuScreen.AboutCompany"
+            android:exported="true" />
+        <activity
             android:name=".MenuScreen.EmergencyContact"
             android:exported="true" />
         <activity
