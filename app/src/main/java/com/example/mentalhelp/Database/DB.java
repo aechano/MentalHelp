@@ -69,7 +69,7 @@ public class DB extends SQLiteOpenHelper {
 
     public void populateMusicTable() {
         List<Music> musicList = this.getAllMusic();
-        int currentEntries = 5; //update this every time you insert new preset music.
+        int currentEntries = 11; //update this every time you insert new preset music.
         if (musicList.size() == currentEntries)
             return; // if music table rows is equal to the current entries, stop the function.
 
@@ -106,6 +106,42 @@ public class DB extends SQLiteOpenHelper {
         //fifth music
         values.put(M_MUSIC, R.raw.rain);
         values.put(M_TITLE, "Meditation Music: Rain");
+        db.insertWithOnConflict(TABLE_MUSIC, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //sixth music
+        values.put(M_MUSIC, R.raw.cafe);
+        values.put(M_TITLE, "Meditation Music: Cafe");
+        db.insertWithOnConflict(TABLE_MUSIC, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //seventh music
+        values.put(M_MUSIC, R.raw.islamic);
+        values.put(M_TITLE, "Meditation Music: Islamic");
+        db.insertWithOnConflict(TABLE_MUSIC, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //eighth music
+        values.put(M_MUSIC, R.raw.lofi_vibes);
+        values.put(M_TITLE, "Meditation Music: Lofi Vibes");
+        db.insertWithOnConflict(TABLE_MUSIC, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //ninth music
+        values.put(M_MUSIC, R.raw.meditation);
+        values.put(M_TITLE, "Meditation Music");
+        db.insertWithOnConflict(TABLE_MUSIC, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //tenth music
+        values.put(M_MUSIC, R.raw.ocean);
+        values.put(M_TITLE, "Meditation Music: Ocean");
+        db.insertWithOnConflict(TABLE_MUSIC, null, values, CONFLICT_IGNORE);
+        values.clear();
+
+        //eleventh music
+        values.put(M_MUSIC, R.raw.piano);
+        values.put(M_TITLE, "Meditation Music: Piano");
         db.insertWithOnConflict(TABLE_MUSIC, null, values, CONFLICT_IGNORE);
         values.clear();
     }
