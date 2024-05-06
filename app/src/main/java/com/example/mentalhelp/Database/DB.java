@@ -147,9 +147,9 @@ public class DB extends SQLiteOpenHelper {
     }
 
     public void populateGuidesTable() {
-        List<Music> musicList = this.getAllMusic();
+        List<GuideListModel> allGuides = this.getAllGuides();
         int currentEntries = 11; //update this every time you insert new preset music.
-        if (musicList.size() == currentEntries)
+        if (allGuides.size() == currentEntries)
             return; // if music table rows is equal to the current entries, stop the function.
 
         SQLiteDatabase db = this.getWritableDatabase();
