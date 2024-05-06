@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.util.TypedValue;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.MenuItem;
@@ -52,18 +53,25 @@ public class Calendar extends AppCompatActivity implements CalendarAdapter.OnIte
         localDate = LocalDate.now();
         setMonthView();
 
+        TypedValue typedValueElement = new TypedValue();
+        TypedValue typedValueBackground = new TypedValue();
+        getTheme().resolveAttribute(android.R.attr.background, typedValueBackground, true);
+        getTheme().resolveAttribute(R.attr.element, typedValueElement, true);
+        int backgroundColor = typedValueBackground.data;
+        int elementColor = typedValueElement.data;
+
         // Set up your toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Set the status bar color
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        getWindow().setStatusBarColor(getResources().getColor(R.color.melrose));
+        getWindow().setStatusBarColor(elementColor);
 
         // Create a SpannableString for the title
         SpannableString spannableString = new SpannableString("Calendar");
         spannableString.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deluge)), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(elementColor), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(spannableString);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

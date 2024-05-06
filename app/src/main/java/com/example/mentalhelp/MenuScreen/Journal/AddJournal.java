@@ -12,6 +12,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,14 +54,21 @@ public class AddJournal extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        TypedValue typedValueElement = new TypedValue();
+        TypedValue typedValueBackground = new TypedValue();
+        getTheme().resolveAttribute(android.R.attr.background, typedValueBackground, true);
+        getTheme().resolveAttribute(R.attr.element, typedValueElement, true);
+        int backgroundColor = typedValueBackground.data;
+        int elementColor = typedValueElement.data;
+
         // Set the status bar color
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        getWindow().setStatusBarColor(getResources().getColor(R.color.melrose));
+        getWindow().setStatusBarColor(elementColor);
 
         // Create a SpannableString for the title
         SpannableString spannableString = new SpannableString("Hidden Blues");
         spannableString.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deluge)), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(elementColor), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(spannableString);
 
         if (!getIntent().hasExtra("JOURNALLIST")){

@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     Handler handler;
     private DB db;
-    private boolean isFirstTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

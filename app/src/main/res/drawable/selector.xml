@@ -3,11 +3,13 @@
 
     <item
         android:state_selected="true"
-        android:drawable="@color/deluge"
-        android:color="@android:color/white"/>
+        android:state_checked="true"
+        android:drawable="?element"
+        android:color="?background"/>
 
     <item
         android:state_selected="false"
-        android:color="@color/deluge"/>
+        android:state_checked="false"
+        android:color="?element"/>
 
 </selector>

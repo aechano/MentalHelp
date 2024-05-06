@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MenuScreen.Settings.Settings">
@@ -11,11 +10,11 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:fontFamily="@font/nunito_sans"
         android:background="?background"
-        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/nunito_sans"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,34 +30,34 @@
             android:id="@+id/theme_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             app:cardBackgroundColor="?background"
             app:cardCornerRadius="10dp"
-            android:layout_marginBottom="10dp"
             app:cardElevation="3dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:orientation="horizontal"
                 android:layout_margin="15dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/theme_icon"
-                    android:padding="5dp"/>
+                    android:padding="5dp"
+                    android:src="@drawable/theme_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Themes"
-                    android:textStyle="bold"
                     android:fontFamily="@font/nunito_sans"
-                    android:textSize="20sp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="Themes"
                     android:textColor="@color/white"
-                    android:paddingEnd="15dp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -68,34 +67,34 @@
             android:id="@+id/about_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             app:cardBackgroundColor="?background"
             app:cardCornerRadius="10dp"
-            android:layout_marginBottom="10dp"
             app:cardElevation="3dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:orientation="horizontal"
                 android:layout_margin="15dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/about_icon"
-                    android:padding="5dp"/>
+                    android:padding="5dp"
+                    android:src="@drawable/about_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mental Help History"
-                    android:textStyle="bold"
                     android:fontFamily="@font/nunito_sans"
-                    android:textSize="20sp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="Mental Help History"
                     android:textColor="@color/white"
-                    android:paddingEnd="15dp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -105,34 +104,34 @@
             android:id="@+id/app_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             app:cardBackgroundColor="?background"
             app:cardCornerRadius="10dp"
-            android:layout_marginBottom="10dp"
             app:cardElevation="3dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:orientation="horizontal"
                 android:layout_margin="15dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/app"
-                    android:padding="5dp"/>
+                    android:padding="5dp"
+                    android:src="@drawable/app" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="About Mental Help"
-                    android:textStyle="bold"
                     android:fontFamily="@font/nunito_sans"
-                    android:textSize="20sp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="About Mental Help"
                     android:textColor="@color/white"
-                    android:paddingEnd="15dp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -142,34 +141,34 @@
             android:id="@+id/contact_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             app:cardBackgroundColor="?background"
             app:cardCornerRadius="10dp"
-            android:layout_marginBottom="10dp"
             app:cardElevation="3dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:orientation="horizontal"
                 android:layout_margin="15dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/contact_view"
-                    android:padding="5dp"/>
+                    android:padding="5dp"
+                    android:src="@drawable/contact_view" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Emergency Contact"
-                    android:textStyle="bold"
                     android:fontFamily="@font/nunito_sans"
-                    android:textSize="20sp"
                     android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="Emergency Contact"
                     android:textColor="@color/white"
-                    android:paddingEnd="15dp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -184,6 +183,7 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
+        app:itemActiveIndicatorStyle="@android:color/transparent"
         app:itemBackground="?background"
         app:itemIconTint="?element"
         app:itemTextColor="?element"
@@ -191,4 +191,4 @@
         app:menu="@menu/menu" />
 
 
-  </RelativeLayout>
+</RelativeLayout>
